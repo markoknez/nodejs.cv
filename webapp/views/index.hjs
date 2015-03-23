@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+
+    <script type="text/javascript" src="/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+    <script type="text/javascript" src="/underscore/underscore.js"></script>
+    <script type="text/javascript" src="/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/angular/angular.js"></script>
+    <script type="text/javascript" src="/angular-ui-router/release/angular-ui-router.js"></script>
+
+    <script type="text/javascript" src="/javascripts/myapp.js"></script>
+    <script type="text/javascript" src="/javascripts/ioService.js"></script>
+
+    <link rel='stylesheet' href='/stylesheets/style.css' />    
+    <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap-theme.css">
+  </head>
+  <body ng-app="myapp">
+  	<div class="container">
+      <center>
+  	    <h1><a href="mailto:markoknez@gmail.com">@</a>marko knezevic</h1>
+        <h4>full stack web developer</h4>
+      </center>
+
+	    <div ui-view></div>
+    </div>
+  </body>
+</html>

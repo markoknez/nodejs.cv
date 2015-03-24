@@ -53,7 +53,7 @@ angular
 						$scope.education = response.data;
 					}, notificationService.errorHandler);
 					$http.get('/experiences').then(function(response){
-						$scope.experiences = response.data;
+						$scope.experience = response.data;
 					}, notificationService.errorHandler);
 
 

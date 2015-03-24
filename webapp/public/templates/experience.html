@@ -1,7 +1,17 @@
+<span class="glyphicon glyphicon-edit" ng-click="editing = !editing"></span>
 <h2>
 	<span class="color-two">exp</span>erience
 </h2>
-<div ng-repeat="exp in experiences">
-	<h4>{{exp.title}}</h4>
-	<p>{{exp.summary}}</p>
+<div ng-show="!editing">	
+	<div ng-repeat="exp in experience.experiences">
+		<h4>{{exp.title}}</h4>
+		<p>{{exp.summary}}</p>
+	</div>
+</div>
+<div ng-show="editing">
+	<div ng-repeat="exp in experiences">
+		<span class="glyphicon glyphicon-trash" ng-click="experiences.splice(exp, 1)"></span>
+		<h4><input type="text" ng-model="exp.title"/></h4>
+		<textarea ng-model="exp.summary" rows="5" cols="50"></textarea>
+	</div>	
 </div>

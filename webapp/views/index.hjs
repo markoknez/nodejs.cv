@@ -10,6 +10,10 @@
     <script type="text/javascript" src="/bootstrap/dist/js/bootstrap.js"></script>
     <script type="text/javascript" src="/angular/angular.js"></script>
     <script type="text/javascript" src="/angular-ui-router/release/angular-ui-router.js"></script>
+    <script type="text/javascript" src="/angular-animate/angular-animate.js"></script>
+
+    <script type="text/javascript" src="/javascripts/helpers/helpers.js"></script>
+    <script type="text/javascript" src="/javascripts/helpers/animation.js"></script>
 
     <script type="text/javascript" src="/javascripts/myapp.js"></script>
     <script type="text/javascript" src="/javascripts/ioService.js"></script>
@@ -20,11 +24,11 @@
   </head>
   <body ng-app="myapp">
   	<div class="container">
+      <notification-messages></notification-messages>
       <center>
-  	    <h1><a href="mailto:markoknez@gmail.com">@</a>marko knezevic</h1>
-        <h4>full stack web developer</h4>
+  	    <h1><a href="mailto:markoknez@gmail.com">@</a>marko<strong>knezevic</strong></h1>
+        <h4><strong>full stack</strong> web developer</h4>
       </center>
-
 	    <div ui-view></div>
     </div>
   </body>

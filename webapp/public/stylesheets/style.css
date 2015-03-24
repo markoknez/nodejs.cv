@@ -6,3 +6,23 @@ body {
 a {
   color: #00B7FF;
 }
+
+.color-one{
+	color: blue;
+}
+
+.color-two{
+	color: red;
+}
+
+.color-three{
+	color: green;
+}
+
+.color-four{
+	color: gray;
+}
+
+.color-five{
+	color: yello;
+}

@@ -1,4 +1,39 @@
-<p>Welcome to my curricullum vitae. This project is hosted on <a href="http://github.com/markoknez/nodejs.cv">GitHub</a> and the source code can be checked out.</p>
+<p>Welcome to my curricullum vitae. This project is hosted on <a href="http://github.com/markoknez/nodejs.cv">GitHub</a>.</p>
+<div anim-type="slide" ng-show="apiResponse == ''" class="my-animate">
+	<form class="form-horizontal" ng-submit="submit()">
+		<div class="row form-group">
+			<label class="col-sm-3 control-label">company name</label>	
+			<div class="col-sm-9">
+				<input class="form-control" type="text" ng-model="name" placeholder="username"/>
+			</div>
+		</div>
+		<div class="row form-group">
+			<label class="col-sm-3 control-label">email</label>
+			<div class="col-sm-9">
+				<input class="form-control" type="text" ng-model="email" placeholder="email address"/>
+			</div>	
+		</div>	
+		<div class="row form-group">
+			<div class="col-sm-offset-3 col-sm-9">
+				<button class="btn btn-default" type="submit">Insert new</button>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="alert alert-success my-animate" anim-type="slide" ng-show="apiResponse">{{apiResponse}}</div>
 
-<div class="alert alert-success" ng-show="ioService.connected">Connected...</div>
-<div class="alert alert-danger" ng-show="!ioService.connected">Disconnected...</div>
+<div ng-repeat="user in users" class="row">	
+	<div class="col-sm-6">
+		<a ng-click="deleteUser(user._id)"><span class="glyphicon glyphicon-trash"></span></a>{{user._id}}
+	</div>
+	<div class="col-sm-6">
+		<a ng-click="hit(user._id)" >
+			<span class="glyphicon glyphicon-plus"></span>
+		</a>
+		<span class="badge">{{user.hitCount}}</span><a href="mailto:{{user.email}}">@</a>{{user.name}}
+	</div>	
+</div>
+
+<div ng-include="'/templates/education.html'"></div>
+<div ng-include="'/templates/experience.html'"></div>
+<div ng-include="'/templates/contact.html'"></div>

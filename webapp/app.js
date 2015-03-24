@@ -10,13 +10,16 @@ var _ = require('underscore');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var contacts = require('./routes/contacts');
+var educations = require('./routes/educations');
+var experiences = require('./routes/experiences');
 
 app.io = require('socket.io')();
 
 //socket io engine setup
-app.io.on('connect', function(socket){
+app.io.on('connect', function(socket) {
   console.log('connect');
-  socket.on('disconnect', function(){
+  socket.on('disconnect', function() {
     console.log('disconnect');
   });
 });
@@ -25,8 +28,7 @@ app.io.on('connect', function(socket){
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -43,7 +45,7 @@ var publicPaths = [{
   to: null
 }];
 _.each(publicPaths, function(item) {
-  if(!item.to)
+  if (!item.to)
     app.use(express.static(path.join(__dirname, item.from)));
   else
     app.use(item.to, express.static(path.join(__dirname, item.from)));
@@ -51,6 +53,9 @@ _.each(publicPaths, function(item) {
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/contacts', contacts);
+app.use('/educations', educations);
+app.use('/experiences', experiences);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -60,6 +65,16 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
+//validation error handling
+app.use(function(err, req, res, next) {
+  if (err.name == 'ValidationError') {
+    return res.status(400).send({
+      message: 'Validation failed',
+      errors: err.errors
+    });
+  }
+  next(err);
+});
 
 // development error handler
 // will print stacktrace

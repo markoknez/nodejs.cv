@@ -1,0 +1,12 @@
+<h3>contact</h3>
+<p>{{contact.email}}</p>
+
+<p>
+{{contact.location.address}}<br/>
+{{contact.location.city}}, {{contact.location.zip}}<br/>
+{{contact.location.state}}<br/>
+</p>
+
+<div ng-repeat="link in contact.links">
+	<a href="{{link.link}}">{{link.name}}</a>
+</div>

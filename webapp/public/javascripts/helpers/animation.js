@@ -50,6 +50,7 @@ angular
 			},
 			removeClass: function(element, className, done) {
 				if (className == 'ng-hide') {
+					$(element).hide();
 					var animType = $(element).attr('anim-type');
 					if (animType.indexOf('-') != -1) {
 						var animationName = animType.split('-')[0];

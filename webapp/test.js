@@ -1,10 +1,18 @@
 var _ = require('underscore');
 var mongoose = require('mongoose');
-var user = require('./models/user');
-var workExperience = require('./models/workExperience');
+var experience = require('./models/experience');
 
-mongoose.connect('mongodb://localhost/cv', function(){
-	console.log('database connecton open');
+var a = new experience({userId: 'marko'});
+a.validate(function (err){
+	if(err) return console.log(err);
 
-	console.log(new workExperience());
-});
+	console.log('no validation errors');
+})
+
+// mongoose.connect('mongodb://localhost/cv', function(){
+// 	console.log('database connecton open');
+
+// 	experience.findOne(function (err, item){
+// 		console.log(item);
+// 	});
+// });

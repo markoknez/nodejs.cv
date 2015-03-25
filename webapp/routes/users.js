@@ -47,7 +47,7 @@ router.put('/:userId', function(req, res, next) {
 		if (err) return next(err);
 		if (result == 0) return res.sendStatus(404);
 
-		res.send(200);
+		res.sendStatus(200);
 	});
 });
 

@@ -1,15 +1,52 @@
+
 <h2>
-	<span class="color-one">edu</span>cation
+	<span class="color-one">edu</span>cation <small><span class="glyphicon glyphicon-edit" ng-click="editing = !editing"></span></small>
 </h2>
-<div class="row">
-	<div class="col-md-2">
-		{{education.duration.from}}-{{education.duration.to}}
+
+<div ng-show="!editing" class="row">
+	<div class="col-xs-2"><span class="pull-right">{{education.duration.from}}-{{education.duration.to}}</span></div>
+	<div class="col-xs-10">
+		<strong class="text-uppercase">{{education.title}}</strong><small class="pull-right">{{education.location}}</small>		
+		<p>
+			<strong class="text-uppercase">{{education.thesis.name}}</strong><br/>
+			{{education.thesis.explanation}}
+		</p>		
 	</div>
-	<div class="col-md-10">
-		<h4>
-			{{education.title}}<br/>
-			<small>{{education.thesis.name}}</small>
-		</h4>		
-		{{education.thesis.explanation}}
+</div>
+
+<div ng-show="editing">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-2 form-group">
+					<label class="label-control">from</label>
+					<input class="form-control" type="number" ng-model="education.duration.from" required my-validation-tooltip/>
+				</div>
+				<div class="col-md-2 form-group">
+					<label class="label-control">to</label>
+					<input class="form-control" type="number" ng-model="education.duration.to" required my-validation-tooltip/>
+				</div>
+				<div class="col-md-5 form-group">
+					<label class="label-control">education title</label>
+					<input class="form-control" type="text" ng-model="education.title" required my-validation-tooltip/>
+				</div>
+				<div class="col-md-3 form-group">
+					<label class="label-control">education location</label>
+					<input class="form-control" type="text" ng-model="education.location" required my-validation-tooltip/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 form-group">
+					<label class="label-control">thesis title</label>
+					<input class="form-control" type="text" ng-model="education.thesis.name"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 form-group">
+					<label class="label-control">summary</label>
+					<textarea class="form-control" rows="5" ng-model="education.thesis.explanation"/>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

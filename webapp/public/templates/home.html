@@ -34,6 +34,10 @@
 	</div>	
 </div>
 
-<div ng-include="'/templates/education.html'"></div>
-<div ng-include="'/templates/experience.html'"></div>
-<div ng-include="'/templates/contact.html'"></div>
+
+<div class="col-md-2" style="text-align: right" ui-view="contact"></div>
+<div class="col-md-10">
+	<div ui-view="education"></div>
+	<div ui-view="experience"></div>
+</div>
+

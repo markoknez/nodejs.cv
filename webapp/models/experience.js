@@ -1,21 +1,30 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
-	userId: String,
+	userId: {
+		type: String,
+		required: true
+	},
 	experiences: {
-		title: String,
-		summary: String,
-		learned: String,
-		technology: [String],
-		team: String,
-		length: String,
-		duration: {
-			from: {
-				type: Number,
+		type: [{
+			title: {
+				type: String,
 				required: true
 			},
-			to: Number
-		}
+			summary: String,
+			implementationChallenges: String,
+			learned: String,
+			technology: [String],
+			team: String,
+			length: String,
+			duration: {
+				from: {
+					type: Number,
+					required: true
+				},
+				to: Number
+			}
+		}]
 	}
 }, {
 	strict: true

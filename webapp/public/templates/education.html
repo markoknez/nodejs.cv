@@ -4,12 +4,12 @@
 </h2>
 
 <div ng-show="!editing" class="row">
-	<div class="col-xs-2"><span class="pull-right">{{education.duration.from}}-{{education.duration.to}}</span></div>
+	<div class="col-xs-2"><span class="pull-right">{{document.duration.from}}-{{document.duration.to}}</span></div>
 	<div class="col-xs-10">
-		<strong class="text-uppercase">{{education.title}}</strong><small class="pull-right">{{education.location}}</small>		
+		<strong class="text-uppercase">{{document.title}}</strong><small class="pull-right">{{document.location}}</small>		
 		<p>
-			<strong class="text-uppercase">{{education.thesis.name}}</strong><br/>
-			{{education.thesis.explanation}}
+			<strong class="text-uppercase">{{document.thesis.name}}</strong><br/>
+			{{document.thesis.explanation}}
 		</p>		
 	</div>
 </div>
@@ -20,33 +20,35 @@
 			<div class="row">
 				<div class="col-md-2 form-group">
 					<label class="label-control">from</label>
-					<input class="form-control" type="number" ng-model="education.duration.from" required my-validation-tooltip/>
+					<input class="form-control" type="number" ng-model="document.duration.from" required my-validation-tooltip/>
 				</div>
 				<div class="col-md-2 form-group">
 					<label class="label-control">to</label>
-					<input class="form-control" type="number" ng-model="education.duration.to" required my-validation-tooltip/>
+					<input class="form-control" type="number" ng-model="document.duration.to" required my-validation-tooltip/>
 				</div>
 				<div class="col-md-5 form-group">
 					<label class="label-control">education title</label>
-					<input class="form-control" type="text" ng-model="education.title" required my-validation-tooltip/>
+					<input class="form-control" type="text" ng-model="document.title" required my-validation-tooltip/>
 				</div>
 				<div class="col-md-3 form-group">
 					<label class="label-control">education location</label>
-					<input class="form-control" type="text" ng-model="education.location" required my-validation-tooltip/>
+					<input class="form-control" type="text" ng-model="document.location" required my-validation-tooltip/>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12 form-group">
 					<label class="label-control">thesis title</label>
-					<input class="form-control" type="text" ng-model="education.thesis.name"/>
+					<input class="form-control" type="text" ng-model="document.thesis.name"/>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12 form-group">
 					<label class="label-control">summary</label>
-					<textarea class="form-control" rows="5" ng-model="education.thesis.explanation"/>
+					<textarea class="form-control" rows="5" ng-model="document.thesis.explanation"/>
 				</div>
 			</div>
 		</div>
 	</div>
+	<button class="btn btn-sm btn-default" ng-click="saveChanges()"><span class="glyphicon glyphicon-floppy-disk"></span></button>
+	<button class="btn btn-sm btn-default" ng-click="cancelChanges()"><span class="glyphicon glyphicon-remove"></span></button>
 </div>

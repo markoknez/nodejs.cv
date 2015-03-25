@@ -12,7 +12,8 @@
 				<strong class="text-uppercase">summary: </strong>{{exp.summary}}<br/>
 				<strong class="text-uppercase">implementation challenges: </strong>{{exp.implementationChallenges}}<br/>
 				<strong class="text-uppercase">what i have learned: </strong>{{exp.learned}}<br/>
-				<strong class="text-uppercase">tehnologies used: </strong><span ng-repeat="tech in exp.technology" class="badge">{{tech}}</span><br/>
+				<strong class="text-uppercase">tehnologies used: </strong>
+					<span ng-repeat="tech in exp.technology"><span class="label label-info">{{tech}}</span> </span><br/>
 				<strong class="text-uppercase">people working on project: </strong>{{exp.team}}<br/>
 				<strong class="text-uppercase">what i have learned: </strong>{{exp.length}}
 			</p>

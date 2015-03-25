@@ -15,7 +15,8 @@ angular
 						templateUrl: '/templates/contact.html'
 					},
 					'education@home': {
-						templateUrl: '/templates/education.html'
+						templateUrl: '/templates/education.html',
+						controller: 'educationCtrl'
 					},
 					'experience@home': {
 						templateUrl: '/templates/experience.html',
@@ -27,7 +28,7 @@ angular
 	}])
 	.controller('homeController', ['$scope', '$http', '$timeout', 'notificationService', function($scope, $http, $timeout, notificationService) {
 		$scope.apiResponse = '';
-		$scope.editing = true;
+		$scope.editing = false;
 
 		function refreshUsers() {
 			$http.get('/users').then(function(response) {

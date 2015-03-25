@@ -4,13 +4,13 @@ var experience = require('../models/experience');
 router.get('/', function(req, res, next) {
 	experience.findOne({}, function(err, item) {
 		if (err) return next(err);
-		if(!item)
+		if (!item)
 			item = new experience();
 		res.send(item);
 	});
 });
 
-router.put('/', function(req, res, next) {	
+router.put('/', function(req, res, next) {
 	experience.update({
 			_id: req.body._id,
 			userId: req.body.userId
@@ -19,7 +19,7 @@ router.put('/', function(req, res, next) {
 		},
 		function(err, response) {
 			if (err) return next(err);
-			if (response != 1) res.sendStatus(500);
+			if (response != 1) return res.sendStatus(500);
 
 			res.sendStatus(200);
 		});

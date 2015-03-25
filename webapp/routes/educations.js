@@ -4,8 +4,22 @@ var education = require('../models/education');
 router.get('/', function(req, res, next) {
 	education.findOne(function(err, item) {
 		if (err) return next(err);
-
+		if (!item)
+			item = new education();
 		res.send(item);
+	});
+});
+
+router.put('/', function(req, res, next) {
+	education.update({
+		_id: req.body._id
+	}, req.body, {
+		upsert: true
+	}, function(err, result) {
+		if (err) return next(err);
+		if (result != 1) return res.sendStatus(500);
+
+		res.sendStatus(200);
 	});
 });
 

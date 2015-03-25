@@ -1,13 +1,12 @@
-.row{
-    margin-left: 0;
-    margin-right: 0;
+body{
+    overflow-y: scroll; 
+    color: rgb(84,84,84);
 }
 
-.container{
-    .row{
-        margin-left: -15px;
-        margin-right: -15px;
-    }
+.header {
+    color: white;
+    background: rgb(68,68,68);
+    padding: 5px 0px;
 }
 
 .color-one{

@@ -1,5 +1,4 @@
-<p>Welcome to my curricullum vitae. This project is hosted on <a href="http://github.com/markoknez/nodejs.cv">GitHub</a>.</p>
-<div anim-type="slide" ng-show="apiResponse == ''" class="my-animate">
+<!-- <div anim-type="slide" ng-show="apiResponse == ''" class="my-animate">
 	<form class="form-horizontal" ng-submit="submit()">
 		<div class="form-group">
 			<label class="col-sm-3 control-label">c. name</label>	
@@ -20,9 +19,9 @@
 		</div>
 	</form>
 </div>
-<div class="alert alert-success my-animate" anim-type="slide" ng-show="apiResponse">{{apiResponse}}</div>
+<div class="alert alert-success my-animate" anim-type="slide" ng-show="apiResponse">{{apiResponse}}</div> -->
 
-<div ng-repeat="user in users" class="row">	
+<!-- <div ng-repeat="user in users" class="row">	
 	<div class="col-sm-6">
 		<a ng-click="deleteUser(user._id)"><span class="glyphicon glyphicon-trash"></span></a>{{user._id}}
 	</div>
@@ -32,12 +31,17 @@
 		</a>
 		<span class="badge">{{user.hitCount}}</span><a href="mailto:{{user.email}}">@</a>{{user.name}}
 	</div>	
+</div> -->
+
+
+<div class="col-md-2">
+	<div class="text-right" ui-view="contact"></div>
+	<div class="text-right" ng-include="'/templates/languages.html'"></div>
+	<div class="text-right" ng-include="'/templates/programming.html'"></div>
 </div>
-
-
-<div class="col-md-2" style="text-align: right" ui-view="contact"></div>
 <div class="col-md-10">
 	<div ui-view="education"></div>
 	<div ui-view="experience"></div>
+	<div ng-include="'/templates/footer.html'"></div>
 </div>
 

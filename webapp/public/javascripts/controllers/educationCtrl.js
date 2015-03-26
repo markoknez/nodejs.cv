@@ -8,18 +8,23 @@ angular
 			$http.get('/educations')
 				.then(function(response) {
 					$scope.document = response.data;
-				}, ns.errorHandler);
+				}, ns.errorHandler2($scope));
 		}
 
 		$scope.saveChanges = function() {
+			if ($scope.form.$invalid) 
+				return ns.pushMessage('Cannot save before validation checks out.', 'danger');
+
 			$http.put('/educations', $scope.document)
-			.then(function (response){
-				$scope.editing = false;
-			}, ns.errorHandler);
+				.then(function(response) {
+					$scope.editing = false;
+					ns.pushMessage('Changes saved successfully.', 'success');
+				}, ns.errorHandler2($scope));
 		}
 
 		$scope.cancelChanges = function() {
 			$scope.editing = false;
+			ns.pushMessage('Changes cancelled', 'info');
 			$scope.refresh();
 		}
 

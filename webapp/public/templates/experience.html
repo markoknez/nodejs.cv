@@ -1,19 +1,18 @@
-
 <h2>
-	<span class="color-two">exp</span>erience <small><span class="glyphicon glyphicon-edit" ng-click="editing = !editing"></span></small>
+	<span class="color-two">exp</span>erience <small><span class="glyphicon glyphicon-edit" ng-show="!editing" ng-click="editing = !editing"></span></small>
 </h2>
 
 <div ng-show="!editing">	
 	<div ng-repeat="exp in document.experiences" class="row">		
 		<div class="col-xs-2"><span class="pull-right">{{exp.duration.from}}-{{exp.duration.to}}</span></div>
 		<div class="col-xs-10">
-			<strong class="text-uppercase">{{exp.title}}</strong><small class="pull-right">FER, Zagreb, Croatia</small>
+			<strong class="text-uppercase exp-title">{{exp.title}}</strong><small class="pull-right">FER, Zagreb, Croatia</small>
 			<p>
 				<strong class="text-uppercase">summary: </strong>{{exp.summary}}<br/>
 				<strong class="text-uppercase">implementation challenges: </strong>{{exp.implementationChallenges}}<br/>
 				<strong class="text-uppercase">what i have learned: </strong>{{exp.learned}}<br/>
 				<strong class="text-uppercase">tehnologies used: </strong>
-					<span ng-repeat="tech in exp.technology"><span class="label label-info">{{tech}}</span> </span><br/>
+				<span ng-repeat="tech in exp.technology" class="my-animate" anim-type="slide"><span class="label label-info">{{tech}}</span> </span><br/>
 				<strong class="text-uppercase">people working on project: </strong>{{exp.team}}<br/>
 				<strong class="text-uppercase">what i have learned: </strong>{{exp.length}}
 			</p>
@@ -21,70 +20,86 @@
 	</div>
 </div>
 
+<div class="modal fade" my-modal-show="selectedExp" my-modal-event="experience.modal.close">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header"><h4>Edit experience</h4></div>
+			<div class="modal-body">
+				<form novalidate>
+					<div class="panel panel-default" ng-show="selectedExp">
+						<div class="panel-body">			
 
-<form ng-show="editing" novalidate ng-submit="alert('m')">
+							<!-- FIELDS title / from / to -->
+							<div class="row">
+								<div class="col-md-6 form-group">
+									<label class="control-label">title</label>
+									<input class="form-control input-sm" type="text" ng-model="selectedExp.title" required my-validation-tooltip/></h4>
+								</div>
+								<div class="col-md-3 form-group">
+									<label class="control-label">from</label>
+									<input class="form-control input-sm" type="number" ng-model="selectedExp.duration.from" required my-validation-tooltip></input>
+								</div>
+								<div class="col-md-3 form-group">
+									<label class="control-label">to</label>
+									<input class="form-control input-sm" type="number" ng-model="selectedExp.duration.to" required my-validation-tooltip></input>
+								</div>
+							</div>
+
+							<!-- FIELDS summary / implementation challenges -->
+							<div class="row">
+								<div class="col-md-6 form-group">
+									<label class="control-label">summary</label>
+									<textarea class="form-control input-sm" rows="5" ng-model="selectedExp.summary"></textarea>			
+								</div>
+								<div class="col-md-6 form-group">
+									<label class="control-label">implementation challenges</label>
+									<textarea class="form-control input-sm" rows="5" ng-model="selectedExp.implementationChallenges"></textarea>
+								</div>
+							</div>
+
+							<!-- FIELDS what i have learned / tehnologies -->				
+							<div class="row">
+								<div class="col-md-6 form-group">
+									<label class="control-label">what i have learned</label>
+									<textarea class="form-control input-sm" rows="5" ng-model="selectedExp.learned"></textarea>
+								</div>
+								<div class="col-md-6 form-group">
+									<label class="control-label">people working on the project</label>
+									<textarea class="form-control input-sm" rows="5" ng-model="selectedExp.team"></textarea>
+								</div>				
+							</div>	
+							<div class="row">
+								<div class="col-md-12 form-group">
+									<label class="control-label">technologies used</label>
+									<input class="form-control" type="text" ng-model="technologie"s/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 form-group">
+									<label class="control-label">project duration</label>
+									<input class="form-control input-sm" type="text" ng-model="selectedExp.length"/>
+								</div>
+							</div>		
+						</div>
+					</div>	
+				</form>
+			</div>			
+		</div>
+	</div>
+</div>
+<div ng-show="editing">
 	<ul class="list-group">
 		<li class="list-group-item">
-			<button class="btn btn-xs btn-default" ng-click="addExperience()">Add new</button>		
+			<button class="btn btn-xs btn-primary" ng-click="addExperience()"><span class="glyphicon glyphicon-plus"></span> Add new</button>		
+			<button class="btn btn-xs btn-danger" ng-click="cancelChanges()"><span class="glyphicon glyphicon-remove"></span> Cancel changes</button>
+			<button class="btn btn-xs btn-success" ng-click="saveChanges()"><span class="glyphicon glyphicon-ok"></span> Save changes</button>
 		</li>
 		<li class="list-group-item" ng-repeat="exp in document.experiences">
 			<span class="badge">{{exp.duration.from}} / {{exp.duration.to}}</span>
 			<div>
-				<button class="btn btn-xs btn-default" ng-click="selectExperience($index)">Edit</button> {{exp.title}}
+				<button class="btn btn-xs btn-danger" ng-click="deleteExperience($index)"><span class="glyphicon glyphicon-trash"></span></button>
+				<button class="btn btn-xs btn-default" ng-click="selectExperience($index)"><span class="glyphicon glyphicon-edit"></span></button> {{exp.title}}
 			</div>
 		</li>
 	</ul>
-	<div class="panel panel-default my-animate" anim-type="slide" ng-show="selectedExp">
-		<div class="panel-body">
-			<span class="glyphicon glyphicon-trash" ng-click="deleteExperience(selectedExp)"></span>
-
-			<!-- FIELDS title / from / to -->
-			<div class="row">
-				<div class="col-md-6 form-group">
-					<label class="control-label">title</label>
-					<input class="form-control input-sm" type="text" ng-model="selectedExp.title" required my-validation-tooltip/></h4>
-				</div>
-				<div class="col-md-3 form-group">
-					<label class="control-label">from</label>
-					<input class="form-control input-sm" type="number" ng-model="selectedExp.duration.from" required my-validation-tooltip></input>
-				</div>
-				<div class="col-md-3 form-group">
-					<label class="control-label">to</label>
-					<input class="form-control input-sm" type="number" ng-model="selectedExp.duration.to" required my-validation-tooltip></input>
-				</div>
-			</div>
-
-			<!-- FIELDS summary / implementation challenges -->
-			<div class="row">
-				<div class="col-md-6 form-group">
-					<label class="control-label">summary</label>
-					<textarea class="form-control input-sm" rows="5" ng-model="selectedExp.summary"></textarea>			
-				</div>
-				<div class="col-md-6 form-group">
-					<label class="control-label">implementation challenges</label>
-					<textarea class="form-control input-sm" rows="5" ng-model="selectedExp.implementationChallenges"></textarea>
-				</div>
-			</div>
-
-			<!-- FIELDS what i have learned / tehnologies -->				
-			<div class="row">
-				<div class="col-md-6 form-group">
-					<label class="control-label">what i have learned</label>
-					<textarea class="form-control input-sm" rows="5" ng-model="selectedExp.learned"></textarea>
-				</div>
-				<div class="col-md-6 form-group">
-					<label class="control-label">people working on the project</label>
-					<textarea class="form-control input-sm" rows="5" ng-model="selectedExp.team"></textarea>
-				</div>				
-			</div>	
-			<div class="row">
-				<div class="col-md-12 form-group">
-					<label class="control-label">project duration</label>
-					<input class="form-control input-sm" type="text" ng-model="selectedExp.length"/>
-				</div>
-			</div>		
-			<button class="btn btn-default" ng-click="cancelChanges()">Cancel</button>
-			<button class="btn btn-default" ng-click="saveChanges()">Save changes</button>
-		</div>		
-	</div>	
-</form>
+</div>

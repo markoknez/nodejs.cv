@@ -11,7 +11,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.put('/', function(req, res, next) {
-	experience.update({
+	var exp = new experience(req.body);
+	exp.validate(function (err){
+		if(err)return next(err);
+
+		experience.update({
 			_id: req.body._id,
 			userId: req.body.userId
 		}, req.body, {
@@ -23,6 +27,7 @@ router.put('/', function(req, res, next) {
 
 			res.sendStatus(200);
 		});
+	});
 });
 
 module.exports = router;

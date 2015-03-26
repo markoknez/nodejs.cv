@@ -15,40 +15,44 @@
 </div>
 
 <div ng-show="editing">
-	<div class="panel panel-default">
-		<div class="panel-body">
-			<div class="row">
-				<div class="col-md-2 form-group">
-					<label class="label-control">from</label>
-					<input class="form-control" type="number" ng-model="document.duration.from" required my-validation-tooltip/>
+	<ul class="list-group">
+		<li class="list-group-item">			
+			<button class="btn btn-xs btn-danger" ng-click="cancelChanges()"><span class="glyphicon glyphicon-remove"></span> Cancel changes</button>
+			<button class="btn btn-xs btn-success" ng-click="saveChanges()"><span class="glyphicon glyphicon-ok"></span> Save changes</button>			
+		</li>
+		<li class="list-group-item">
+			<form novalidate name="form">
+				<div class="row">
+					<div class="col-md-2 form-group">
+						<label class="label-control">from</label>
+						<input class="form-control" type="number" name="duration.from" ng-model="document.duration.from" my-validation-tooltip/>
+					</div>					
+					<div class="col-md-2 form-group">
+						<label class="label-control">to</label>
+						<input class="form-control" type="number" name="duration.to" ng-model="document.duration.to" required my-validation-tooltip/>
+					</div>
+					<div class="col-md-5 form-group">
+						<label class="label-control">education title</label>
+						<input class="form-control" type="text" ng-model="document.title" required my-validation-tooltip/>
+					</div>
+					<div class="col-md-3 form-group">
+						<label class="label-control">education location</label>
+						<input class="form-control" type="text" ng-model="document.location" required my-validation-tooltip/>
+					</div>
 				</div>
-				<div class="col-md-2 form-group">
-					<label class="label-control">to</label>
-					<input class="form-control" type="number" ng-model="document.duration.to" required my-validation-tooltip/>
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<label class="label-control">thesis title</label>
+						<input class="form-control" type="text" ng-model="document.thesis.name"/>
+					</div>
 				</div>
-				<div class="col-md-5 form-group">
-					<label class="label-control">education title</label>
-					<input class="form-control" type="text" ng-model="document.title" required my-validation-tooltip/>
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<label class="label-control">summary</label>
+						<textarea class="form-control" rows="5" ng-model="document.thesis.explanation"/>
+					</div>
 				</div>
-				<div class="col-md-3 form-group">
-					<label class="label-control">education location</label>
-					<input class="form-control" type="text" ng-model="document.location" required my-validation-tooltip/>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 form-group">
-					<label class="label-control">thesis title</label>
-					<input class="form-control" type="text" ng-model="document.thesis.name"/>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 form-group">
-					<label class="label-control">summary</label>
-					<textarea class="form-control" rows="5" ng-model="document.thesis.explanation"/>
-				</div>
-			</div>
-		</div>
-	</div>
-	<button class="btn btn-sm btn-default" ng-click="saveChanges()"><span class="glyphicon glyphicon-floppy-disk"></span></button>
-	<button class="btn btn-sm btn-default" ng-click="cancelChanges()"><span class="glyphicon glyphicon-remove"></span></button>
+			</form>
+		</li>
+	</ul>
 </div>

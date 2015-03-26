@@ -1,12 +1,19 @@
 body{
-    overflow-y: scroll; 
-    color: rgb(84,84,84);
+	overflow-y: scroll; 
+	color: rgb(84,84,84);
 }
 
 .header {
-    color: white;
-    background: rgb(68,68,68);
-    padding: 5px 0px;
+	color: white;
+	background: rgb(68,68,68);
+	padding: 5px 0px;
+}
+
+.notification-body{
+	position: fixed;
+	padding: 20px 50px;
+	z-index: 1000;
+	right: 0;
 }
 
 .color-one{

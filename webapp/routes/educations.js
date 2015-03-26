@@ -11,15 +11,21 @@ router.get('/', function(req, res, next) {
 });
 
 router.put('/', function(req, res, next) {
-	education.update({
-		_id: req.body._id
-	}, req.body, {
-		upsert: true
-	}, function(err, result) {
-		if (err) return next(err);
-		if (result != 1) return res.sendStatus(500);
 
-		res.sendStatus(200);
+	var edu = new education(req.body);
+	edu.validate(function (err){
+		if(err)return next(err);
+
+		education.update({
+			_id: req.body._id
+		}, req.body, {
+			upsert: true
+		}, function(err, result) {
+			if (err) return next(err);
+			if (result != 1) return res.sendStatus(500);
+
+			res.sendStatus(200);
+		});
 	});
 });
 

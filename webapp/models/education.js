@@ -16,7 +16,6 @@ var schema = new mongoose.Schema({
 	strict: true
 });
 
-schema.path('duration.from')
 
 var education = mongoose.model('education', schema);
 

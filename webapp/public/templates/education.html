@@ -21,7 +21,7 @@
 			<button class="btn btn-xs btn-success" ng-click="saveChanges()"><span class="glyphicon glyphicon-ok"></span> Save changes</button>			
 		</li>
 		<li class="list-group-item">
-			<form novalidate name="form">
+			<form novalidate name="form" ng-submit="saveChanges()">
 				<div class="row">
 					<div class="col-md-2 form-group">
 						<label class="label-control">from</label>
@@ -33,25 +33,26 @@
 					</div>
 					<div class="col-md-5 form-group">
 						<label class="label-control">education title</label>
-						<input class="form-control" type="text" ng-model="document.title" required my-validation-tooltip/>
+						<input class="form-control" type="text" name="title" ng-model="document.title" my-validation-tooltip/>
 					</div>
 					<div class="col-md-3 form-group">
 						<label class="label-control">education location</label>
-						<input class="form-control" type="text" ng-model="document.location" required my-validation-tooltip/>
+						<input class="form-control" type="text" name="location" ng-model="document.location" my-validation-tooltip/>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12 form-group">
 						<label class="label-control">thesis title</label>
-						<input class="form-control" type="text" ng-model="document.thesis.name"/>
+						<input class="form-control" type="text" name="thesis.name" ng-model="document.thesis.name" my-validation-tooltip/>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12 form-group">
 						<label class="label-control">summary</label>
-						<textarea class="form-control" rows="5" ng-model="document.thesis.explanation"/>
+						<textarea class="form-control" rows="5" name="explanation" ng-model="document.thesis.explanation" my-validation-tooltip/>
 					</div>
 				</div>
+				<input type="submit" class="ng-hide"/>
 			</form>
 		</li>
 	</ul>

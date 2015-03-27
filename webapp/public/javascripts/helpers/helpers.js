@@ -28,7 +28,6 @@ angular
 
 		self.handleValidationError = function(errResponse, scope) {
 			_.each(errResponse.data.errors, function(value, key) {
-				debugger;
 				scope.form[key].serverError = value.message;
 				scope.form[key].$validate();
 			});
@@ -43,7 +42,7 @@ angular
 
 			self.messages.push(message);
 			$timeout(function() {
-				self.messages.pop();
+				self.messages.shift();
 			}, 5000);
 		};
 

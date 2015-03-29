@@ -78,4 +78,12 @@ angular
 
 
 		refreshUsers();
+	}])
+	.controller('headerCtrl', ['$scope', '$http', 'notificationService', function ($scope, $http, ns){
+		$scope.document = {};
+
+		$http.get('/contacts')
+			.then(function (response){
+				$scope.document = response.data;
+			}, ns.errorHadler);
 	}]);

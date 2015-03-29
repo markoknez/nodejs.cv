@@ -6,6 +6,8 @@
   <title>{{ title }}</title>
 
   <script type="text/javascript" src="/jquery/dist/jquery.js"></script>
+  <script type="text/javascript" src="/jquery-ui/jquery-ui.js"></script>
+
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
   <script type="text/javascript" src="/gsap/src/uncompressed/jquery.gsap.js"></script>
@@ -14,12 +16,12 @@
 
   <script type="text/javascript" src="/underscore/underscore.js"></script>
   <script type="text/javascript" src="/bootstrap/dist/js/bootstrap.js"></script>
-  <script type="text/javascript" src="/angular/angular.js"></script>
-  <script type="text/javascript" src="/angular-ui-router/release/angular-ui-router.js"></script>
-  <script type="text/javascript" src="/angular-animate/angular-animate.js"></script>
 
-  <script type="text/javascript" src="/jquery-ui/jquery-ui.js"></script>
+  <script type="text/javascript" src="/angular/angular.js"></script>
+  <script type="text/javascript" src="/angular-animate/angular-animate.js"></script>
+  <script type="text/javascript" src="/angular-ui-router/release/angular-ui-router.js"></script>
   <script type="text/javascript" src="/angular-dragdrop/src/angular-dragdrop.js"></script>
+
 
   <script type="text/javascript" src="/javascripts/helpers/helpers.js"></script>
   <script type="text/javascript" src="/javascripts/helpers/animation.js"></script>
@@ -38,13 +40,7 @@
   <div class="notification-body col-lg-4 col-md-6 col-sm-12">
     <notification-messages></notification-messages>
   </div>
-  <div class="container-fluid header">
-
-    <center style="margin-top: 50px; margin-bottom: 50px">
-      <h1><a href="mailto:markoknez@gmail.com">@ </a>marko<strong>knezevic</strong></h1>
-      <h4>full stack <small>web developer</small></h4>
-    </center>
-  </div>
+  <div ng-include="'/templates/header.html'"></div>
   <div class="container">
    <div ui-view></div>
    <div>

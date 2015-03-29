@@ -1,6 +1,13 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
+	userId: {
+		type: String,
+		required: true
+	},
+	firstName: String,
+	lastName: String,
+	position: String,
 	email: String,
 	location: {
 		address: String,

@@ -2,26 +2,31 @@ var router = require('express').Router();
 var experience = require('../models/experience');
 
 router.get('/', function(req, res, next) {
-	experience.findOne({}, function(err, item) {
+	experience.findOne({
+		userId: req.cookies.user
+	}, function(err, item) {
 		if (err) return next(err);
 		if (!item)
 			item = new experience();
+
 		res.send(item);
 	});
 });
 
 router.put('/', function(req, res, next) {
 	var exp = new experience(req.body);
-	exp.validate(function (err){
-		if(err)return next(err);
+	//overwrite userId with what is logged in session
+	exp.userId = req.cookies.user;
+
+	exp.validate(function(err) {
+		if (err) return next(err);
 
 		experience.update({
-			_id: req.body._id,
-			userId: req.body.userId
-		}, req.body, {
+			_id: exp._id,
+			userId: req.cookies.user
+		}, exp.toObject(), {
 			upsert: true
-		},
-		function(err, response) {
+		}, function(err, response) {
 			if (err) return next(err);
 			if (response != 1) return res.sendStatus(500);
 

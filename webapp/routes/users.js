@@ -36,7 +36,7 @@ router.post('/', function(req, res, next) {
 router.put('/:userId', function(req, res, next) {
 	if (!req.params.userId)
 		return res.sendStatus(404);
-	
+
 	user.update({
 		_id: req.params.userId
 	}, {
@@ -64,6 +64,11 @@ router.delete('/:userId', function(req, res, next) {
 			return res.status(400).send('User with id [userId] not found.'.replace(/userId/, userId));
 		res.sendStatus(200);
 	});
+});
+
+router.get('/login/:userName', function(req, res, next) {
+	res.cookie('user', req.params.userName);
+	res.redirect('/');	
 });
 
 module.exports = router;

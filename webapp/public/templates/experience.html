@@ -2,9 +2,11 @@
 	<span class="color-two">exp</span>erience <small><span class="glyphicon glyphicon-edit" ng-show="!editing" ng-click="editing = !editing"></span></small>
 </h2>
 
-<div ng-show="!editing">	
+<span class="glyphicon glyphicon-plus" ng-click="addExperience()"></span>
+
+<div ng-show="true">	
 	<div ng-repeat="exp in document.experiences" class="row">		
-		<div class="col-xs-2"><span class="pull-right">{{exp.duration.from}}-{{exp.duration.to}}</span></div>
+		<div class="col-xs-2"><span class="pull-right"><span class="glyphicon glyphicon-edit" ng-click="selectExperience($index)"></span>{{exp.duration.from}}-{{exp.duration.to}}</span></div>
 		<div class="col-xs-10">
 			<strong class="text-uppercase exp-title">{{exp.title}}</strong><small class="pull-right">FER, Zagreb, Croatia</small>
 			<p>
@@ -71,7 +73,7 @@
 							<div class="row">
 								<div class="col-md-12 form-group">
 									<label class="control-label">technologies used</label>
-									<input class="form-control" type="text" ng-model="technologie"s/>
+									<input class="form-control" type="text" ng-model="technologySetter" ng-model-options="{getterSetter: true}"/>
 								</div>
 							</div>
 							<div class="row">
@@ -83,11 +85,15 @@
 						</div>
 					</div>	
 				</form>
-			</div>			
+			</div>		
+			<div class="model-footer">
+				<button class="btn btn-xs btn-danger" ng-click="cancelChanges()"><span class="glyphicon glyphicon-remove"></span> Cancel changes</button>
+				<button class="btn btn-xs btn-success" ng-click="saveChanges()"><span class="glyphicon glyphicon-ok"></span> Save changes</button>	
+			</div>	
 		</div>
 	</div>
 </div>
-<div ng-show="editing">
+<div ng-show="false">
 	<ul class="list-group">
 		<li class="list-group-item">
 			<button class="btn btn-xs btn-primary" ng-click="addExperience()"><span class="glyphicon glyphicon-plus"></span> Add new</button>		

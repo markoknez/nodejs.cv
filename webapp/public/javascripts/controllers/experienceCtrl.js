@@ -4,6 +4,16 @@ angular
 		$scope.document = {};
 		$scope.editing = true;
 		$scope.selectedExp = null;
+		$scope.technologySetter = function(value) {
+			if (angular.isDefined(value) && $scope.selectedExp) {
+				$scope.selectedExp.technology = value.split(';');
+			}
+
+			if ($scope.selectedExp)
+				return $scope.selectedExp.technology.join(';');
+			else
+				return '';
+		}
 
 		$scope.refresh = function() {
 			$http.get('/experiences')
@@ -40,10 +50,10 @@ angular
 
 		$scope.selectExperience = function(index) {
 			var newSelection = $scope.document.experiences[index];
-			$scope.selectedExp = newSelection;			
+			$scope.selectedExp = newSelection;
 		}
 
-		$scope.$on('experience.modal.close', function(){
+		$scope.$on('experience.modal.close', function() {
 			$scope.selectedExp = null;
 		});
 

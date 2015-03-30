@@ -4,12 +4,14 @@ angular
 		$scope.document = {};
 		$scope.editing = true;
 		$scope.selectedExp = null;
+
 		$scope.technologySetter = function(value) {
 			if (angular.isDefined(value) && $scope.selectedExp) {
 				$scope.selectedExp.technology = value.split(';');
+				return value;				
 			}
 
-			if ($scope.selectedExp)
+			if ($scope.selectedExp && $scope.selectedExp.technology)
 				return $scope.selectedExp.technology.join(';');
 			else
 				return '';

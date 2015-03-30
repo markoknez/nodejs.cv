@@ -9,6 +9,10 @@ body{
 	padding: 5px 0px;
 }
 
+.clickable{
+	cursor: pointer;
+}
+
 .notification-body{
 	position: fixed;
 	padding: 20px 50px;

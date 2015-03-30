@@ -1,12 +1,21 @@
 <h2>
-	<span class="color-two">exp</span>erience <small><span class="glyphicon glyphicon-edit" ng-show="!editing" ng-click="editing = !editing"></span></small>
+	<span class="color-two">exp</span>erience 
+	<small>
+		<a class="clickable"><span class="glyphicon glyphicon-edit" ng-show="!editing" ng-click="editing = !editing"></span></a>
+	</small>	
 </h2>
-
-<span class="glyphicon glyphicon-plus" ng-click="addExperience()"></span>
+<p ng-click="addExperience()">	
+	<a class="clickable"><span class="glyphicon glyphicon-plus"></span>add new experience</a>
+</p>
 
 <div ng-show="true">	
-	<div ng-repeat="exp in document.experiences" class="row">		
-		<div class="col-xs-2"><span class="pull-right"><span class="glyphicon glyphicon-edit" ng-click="selectExperience($index)"></span>{{exp.duration.from}}-{{exp.duration.to}}</span></div>
+	<div ng-repeat="exp in document.experiences" class="row">			
+		<div class="col-xs-2">
+			<span class="pull-right">
+				<a my-confirm-cancel="log('test' + $index)" my-confirm="deleteExperience($index)" class="clickable"><span class="glyphicon glyphicon-trash"></span></a>
+				<a ng-click="selectExperience($index)" class="clickable"><span class="glyphicon glyphicon-edit"></span></a> {{exp.duration.from}}-{{exp.duration.to}}
+			</span>
+		</div>
 		<div class="col-xs-10">
 			<strong class="text-uppercase exp-title">{{exp.title}}</strong><small class="pull-right">FER, Zagreb, Croatia</small>
 			<p>
@@ -86,14 +95,15 @@
 					</div>	
 				</form>
 			</div>		
-			<div class="model-footer">
+			<div class="modal-footer">
 				<button class="btn btn-xs btn-danger" ng-click="cancelChanges()"><span class="glyphicon glyphicon-remove"></span> Cancel changes</button>
-				<button class="btn btn-xs btn-success" ng-click="saveChanges()"><span class="glyphicon glyphicon-ok"></span> Save changes</button>	
+				<button class="btn btn-xs btn-success" ng-click="saveChanges()"><span class="glyphicon glyphicon-ok"></span> Save changes</button>					
 			</div>	
 		</div>
 	</div>
 </div>
-<div ng-show="false">
+
+<!-- <div ng-show="false">
 	<ul class="list-group">
 		<li class="list-group-item">
 			<button class="btn btn-xs btn-primary" ng-click="addExperience()"><span class="glyphicon glyphicon-plus"></span> Add new</button>		
@@ -108,4 +118,4 @@
 			</div>
 		</li>
 	</ul>
-</div>
+</div> -->

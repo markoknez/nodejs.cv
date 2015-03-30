@@ -164,4 +164,38 @@ angular
 			});
 		}
 	};
-});
+})
+
+.directive('myConfirm', [function() {
+	return {
+		restrict: 'A',
+		scope: {
+			'myConfirm': '&',
+			'myConfirmCancel': '&'
+		},
+		controller: ['$scope', '$element', '$templateRequest', '$compile', function($scope, $element, $templateRequest, $compile) {
+			$templateRequest('/templates/confirmModal.html').then(function(data) {
+				$element.on('click', function() {
+					var compiledModal = $compile(data)($scope);
+					$('body').append(compiledModal);
+					$('#myConfirmDialog').modal('show');
+
+					$('body').on('hidden.bs.modal', '#myConfirmDialog', function(element) {
+						$('body').off('hidden.bs.modal');
+						$('#myConfirmDialog').remove();
+					});
+				});
+			});
+
+			$scope.yes = function() {
+				$scope.myConfirm();
+				$('#myConfirmDialog').modal('hide');
+			}
+
+			$scope.no = function() {
+				$scope.myConfirmCancel();
+				$('#myConfirmDialog').modal('hide');
+			}
+		}]
+	};
+}]);

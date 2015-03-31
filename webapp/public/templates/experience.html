@@ -1,29 +1,41 @@
 <h2>
-	<span class="color-two">exp</span>erience 
 	<small>
-		<a class="clickable"><span class="glyphicon glyphicon-edit" ng-show="!editing" ng-click="editing = !editing"></span></a>
+		<a class="clickable" ng-click="viewCollapsed = !viewCollapsed"><span class="glyphicon glyphicon-th-list"></span></a>		
+	</small>
+	<span class="color-two"> exp</span>erience 
+	<small>
+		<a class="clickable"><span class="glyphicon glyphicon-edit" ng-click="viewEditing = !viewEditing"></span></a>
 	</small>	
 </h2>
-<p ng-click="addExperience()">	
-	<a class="clickable"><span class="glyphicon glyphicon-plus"></span>add new experience</a>
-</p>
+<div ng-show="viewEditing">	
+	<a class="clickable" ng-click="addExperience()"><span class="glyphicon glyphicon-plus"></span>add new experience</a>
+	<button class="btn btn-xs btn-danger" ng-click="cancelChanges()"><span class="glyphicon glyphicon-remove"></span> Cancel changes</button>
+	<button class="btn btn-xs btn-success" ng-click="saveChanges()"><span class="glyphicon glyphicon-ok"></span> Save changes</button>					
+</div>
 
 <div ng-show="true">	
 	<div ng-repeat="exp in document.experiences" class="row">			
 		<div class="col-xs-2">
-			<span class="pull-right">
-				<a my-confirm-cancel="log('test' + $index)" my-confirm="deleteExperience($index)" class="clickable"><span class="glyphicon glyphicon-trash"></span></a>
-				<a ng-click="selectExperience($index)" class="clickable"><span class="glyphicon glyphicon-edit"></span></a> {{exp.duration.from}}-{{exp.duration.to}}
+			<span class="pull-right">								
+				<a ng-show="viewEditing" ng-click="deleteExperience($index)" class="clickable">
+					<span class="glyphicon glyphicon-trash"></span>
+				</a>
+				 {{exp.duration.from}}-{{exp.duration.to}}
 			</span>
 		</div>
 		<div class="col-xs-10">
-			<strong class="text-uppercase exp-title">{{exp.title}}</strong><small class="pull-right">FER, Zagreb, Croatia</small>
-			<p>
+			<small>
+				<a ng-show="viewEditing" ng-click="selectExperience($index)" class="clickable">				
+					<span class="glyphicon glyphicon-edit"></span>
+				</a>
+			</small>
+			<strong class="text-uppercase exp-title"> {{exp.title}}</strong><small class="pull-right">FER, Zagreb, Croatia</small>
+			<p class="my-animate" anim-type="jqSlide" ng-show="!viewCollapsed">
 				<strong class="text-uppercase">summary: </strong>{{exp.summary}}<br/>
 				<strong class="text-uppercase">implementation challenges: </strong>{{exp.implementationChallenges}}<br/>
 				<strong class="text-uppercase">what i have learned: </strong>{{exp.learned}}<br/>
 				<strong class="text-uppercase">tehnologies used: </strong>
-				<span ng-repeat="tech in exp.technology" class="my-animate" anim-type="slide"><span class="label label-info">{{tech}}</span> </span><br/>
+				<span ng-repeat="tech in exp.technology"><span class="label label-info">{{tech}}</span> </span><br/>
 				<strong class="text-uppercase">people working on project: </strong>{{exp.team}}<br/>
 				<strong class="text-uppercase">what i have learned: </strong>{{exp.length}}
 			</p>
@@ -36,7 +48,7 @@
 		<div class="modal-content">
 			<div class="modal-header"><h4>Edit experience</h4></div>
 			<div class="modal-body">
-				<form novalidate>
+				<form name="form" novalidate>
 					<div class="panel panel-default" ng-show="selectedExp">
 						<div class="panel-body">			
 
@@ -95,10 +107,6 @@
 					</div>	
 				</form>
 			</div>		
-			<div class="modal-footer">
-				<button class="btn btn-xs btn-danger" ng-click="cancelChanges()"><span class="glyphicon glyphicon-remove"></span> Cancel changes</button>
-				<button class="btn btn-xs btn-success" ng-click="saveChanges()"><span class="glyphicon glyphicon-ok"></span> Save changes</button>					
-			</div>	
 		</div>
 	</div>
 </div>

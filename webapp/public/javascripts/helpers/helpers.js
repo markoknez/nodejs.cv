@@ -139,7 +139,7 @@ angular
 
 .directive('myModalShow', function() {
 	return {
-		restring: 'A',
+		restrict: 'A',
 		scope: {
 			'myModalShow': '=',
 			'myModalEvent': '@'
@@ -151,7 +151,7 @@ angular
 						keyboard: true
 					});
 				} else {
-					if ($(element).is(':visible')) {
+					if ($(element).data('bs.modal') && $(element).data('bs.modal').isShown) {
 						$(element).modal('hide');
 					}
 				}
@@ -160,7 +160,7 @@ angular
 			$(element).on('hide.bs.modal', function() {
 				scope.$evalAsync(function() {
 					scope.$emit(scope.myModalEvent);
-				})
+				});
 			});
 		}
 	};

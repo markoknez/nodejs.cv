@@ -15,7 +15,11 @@ var schema = new mongoose.Schema({
 		zip: String,
 		state: String
 	},
-},{
+	links: [{
+		name: String,
+		url: String
+	}]
+}, {
 	strict: true
 });
 

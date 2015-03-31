@@ -1,12 +1,37 @@
-<h3>contact</h3>
-<p>{{contact.email}}</p>
+<h3>contact <small><a class="clickable" ng-click="viewEditing = !viewEditing"><span class="glyphicon glyphicon-edit"></span></a></small></h3>
 
-<p>
-{{contact.location.address}}<br/>
-{{contact.location.city}}, {{contact.location.zip}}<br/>
-{{contact.location.state}}<br/>
-</p>
+<div ng-show="!viewEditing">
+	<p>{{document.email}}</p>
+	<p>
+	{{document.location.address}}<br/>
+	{{document.location.city}}, {{document.location.zip}}<br/>
+	{{document.location.state}}<br/>
+	</p>
+	<div ng-repeat="link in document.links">
+		<a href="{{link.url}}" target="_blank">{{link.name}}</a>
+	</div>
+</div>
 
-<div ng-repeat="link in contact.links">
-	<a href="{{link.link}}">{{link.name}}</a>
+<div ng-show="viewEditing">
+	<a class="clickable" ng-click="save()"><span class="glyphicon glyphicon-floppy-disk"></span></a>
+	<a class="clickable" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span></a>
+
+	<input class="form-control" type="text" placeholder="email" ng-model="document.email"/>
+	<input class="form-control" type="text" placeholder="address" ng-model="document.location.address"/>
+	<input class="form-control" type="text" placeholder="city" ng-model="document.location.city"/>
+	<input class="form-control" type="text" placeholder="zip" ng-model="document.location.zip"/>
+	<input class="form-control" type="text" placeholder="state" ng-model="document.location.state"/>
+
+	<a class="clickable" ng-click="add()"><span class="glyphicon glyphicon-plus"></span></a>
+	<div ng-repeat="link in document.links" class="row">
+		<div class="col-xs-1">
+			<a class="clickable" ng-click="delete($index)"><span class="glyphicon glyphicon-trash"></span></a>
+		</div>
+		<div class="col-xs-2">						
+			<input class="form-control" type="text" placeholder="name" ng-model="link.name"/>
+		</div>
+		<div class="col-xs-9">			
+			<input class="form-control" type="text" placeholder="url" ng-model="link.url"/>
+		</div>
+	</div>
 </div>

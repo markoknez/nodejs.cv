@@ -13,6 +13,8 @@ var users = require('./routes/users');
 var contacts = require('./routes/contacts');
 var educations = require('./routes/educations');
 var experiences = require('./routes/experiences');
+var languages = require('./routes/languages');
+var programmings = require('./routes/programmings');
 
 app.io = require('socket.io')();
 
@@ -56,6 +58,8 @@ app.use('/users', users);
 app.use('/contacts', contacts);
 app.use('/educations', educations);
 app.use('/experiences', experiences);
+app.use('/languages', languages);
+app.use('/programmings', programmings);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

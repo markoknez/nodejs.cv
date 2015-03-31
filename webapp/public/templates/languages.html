@@ -1,7 +1,19 @@
-<h3>languages</h3>
+<h3>languages <small><a class="clickable" ng-click="viewEditing = !viewEditing"><span class="glyphicon glyphicon-edit"></span></a></small></h3>
 
-<p>
-	<strong>english</strong> - very good in both speaking and writing<br/>
-	<strong>slovenian</strong> - very good in listening and reading, thanks to my girlfriend <3
-	<strong>croatian</strong> - mother thounge
-</p>
+<div ng-show="!viewEditing">
+	<div ng-repeat="lang in document.languages"><strong>{{lang.language}}</strong> - {{lang.summary}}</div>
+</div>
+<div ng-show="viewEditing">
+	<a class="clickable" ng-click="add()"><span class="glyphicon glyphicon-plus"></span></a>
+	<a class="clickable" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span></a>
+	<a class="clickable" ng-click="save()"><span class="glyphicon glyphicon-floppy-disk"></span></a>
+	<div ng-repeat="lang in document.languages" class="row">			
+		<a class="col-xs-1 clickable" ng-click="delete($index)"><span class="glyphicon glyphicon-trash"></span></a>
+		<div class="col-xs-3">			
+			<input class="form-control" placeholder="language" ng-model="lang.language"/>
+		</div>
+		<div class="col-xs-8">			
+			<input class="form-control" placeholder="summary" ng-model="lang.summary"/>
+		</div>
+	</div>
+</div>

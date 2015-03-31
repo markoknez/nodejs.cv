@@ -33,9 +33,9 @@ angular
 		}
 
 		$scope.addExperience = function() {
-			var newExp = {};
-			$scope.document.experiences.push(newExp);
-			$scope.selectedExp = newExp;
+			// var newExp = {};
+			$scope.document.experiences.push({});
+			//$scope.selectedExp = newExp;
 		}
 
 		$scope.deleteExperience = function(index) {
@@ -56,6 +56,10 @@ angular
 		}
 
 		$scope.$on('experience.modal.close', function() {
+			// //if user did not touch the form, remove the added element
+			// if($scope.form.$pristine){
+			// 	$scope.document.experiences.pop();
+			// }
 			$scope.selectedExp = null;
 		});
 

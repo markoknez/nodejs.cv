@@ -4,15 +4,16 @@ angular
 		$urlRouterProvider.otherwise('/home');
 
 		$stateProvider
-			.state('home', {				
-				url: '/home',				
+			.state('home', {
+				url: '/home',
 				views: {
 					'': {
 						templateUrl: '/templates/home.html',
 						controller: 'homeController'
 					},
 					'contact@home': {
-						templateUrl: '/templates/contact.html'
+						templateUrl: '/templates/contact.html',
+						controller: 'contactCtrl'
 					},
 					'education@home': {
 						templateUrl: '/templates/education.html',
@@ -21,7 +22,14 @@ angular
 					'experience@home': {
 						templateUrl: '/templates/experience.html',
 						controller: 'experienceCtrl'
-
+					},
+					'language@home': {
+						templateUrl: '/templates/languages.html',
+						controller: 'languageCtrl'
+					},
+					'programming@home':{
+						templateUrl:'/templates/programming.html',
+						controller: 'programmingCtrl'
 					}
 				}
 			});
@@ -79,11 +87,11 @@ angular
 
 		refreshUsers();
 	}])
-	.controller('headerCtrl', ['$scope', '$http', 'notificationService', function ($scope, $http, ns){
+	.controller('headerCtrl', ['$scope', '$http', 'notificationService', function($scope, $http, ns) {
 		$scope.document = {};
 
 		$http.get('/contacts')
-			.then(function (response){
+			.then(function(response) {
 				$scope.document = response.data;
 			}, ns.errorHadler);
 	}]);

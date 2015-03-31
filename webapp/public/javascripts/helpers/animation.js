@@ -1,13 +1,68 @@
-function slideDown(e, done){
-	TweenMax.from(e, 0.5, {y:"-=30px", rotation:"-40deg", alpha:0, scale:1.8, height: 0, ease:Back.easeOut, onComplete: done, clearProps: 'all', force3D: true});
-}
+var animations = {
+	funkyIn: function(e, done) {
+		TweenMax.from(e, 0.5, {
+			y: "-=30px",
+			rotation: "-40deg",
+			alpha: 0,
+			scale: 1.8,
+			height: 0,
+			ease: Back.easeOut,
+			onComplete: done,
+			clearProps: 'all',
+			force3D: true
+		});
+	},
+	funkyOut: function(e, done) {
+		var tl = new TimelineMax();
+		tl.to(e, 0.5, {
+			y: "-=30px",
+			rotation: "-40deg",
+			alpha: 0,
+			scale: 1.8,
+			ease: Back.easeOut,
+			margin: 0,
+			padding: 0,
+			height: 0
+				// });
+				,
+			onComplete: done,
+			clearProps: 'all',
+			force3D: true
+		});
+	},
 
-function slideUp (e, done) {	
-	var tl = new TimelineMax();	
-	tl.to(e, 0.5, {y:"-=30px", rotation:"-40deg", alpha:0, scale:1.8, ease:Back.easeOut, margin:0, padding: 0, height: 0
-			// });
-	, onComplete: done, clearProps: 'all', force3D: true});	
-}
+	jqSlideIn: function(e, done) {
+		$(e).slideDown(done);
+	},
+	jqSlideOut: function(e, done) {
+		$(e).slideUp(done);
+	},
+	jqFadeIn: function(e, done) {
+		$(e).fadeIn(done);
+	},
+	jqFadeOut: function(e, done) {
+		$(e).fadeOut(done);
+	},
+
+	slideIn: function(e, done) {
+		TweenMax.from(e, 0.5, {
+			height: 0,
+			ease: Back.easeOut,
+			onComplete: done,
+			clearProps: 'all',
+			force3D: true
+		});
+	},
+	slideOut: function(e, done) {
+		TweenMax.to(e, 0.5, {
+			height: 0,
+			ease: Back.easeOut,
+			onComplete: done,
+			clearProps: 'all',
+			force3D: true
+		});
+	}
+};
 
 angular
 	.module('myAnimate', ['ngAnimate'])
@@ -15,66 +70,40 @@ angular
 
 		return {
 			enter: function(element, done) {
-				// $(element).hide();
 				var animType = $(element).attr('anim-type');
-				if (animType.indexOf('-') != -1) {
-					var animationName = animType.split('-')[0];
-					$(element)[animationName](done);
-				} else {
-					if (animType == 'slide') {
-						slideDown(element, done)
-					} else if (animType == 'fade') {
-						$(element).fadeIn(done);
-					} else
-						throw new Error('Animation animType not supported.'.replace(/animType/, animType));
-				}
+				var inAnimation = animations[animType + 'In'];
+				if (inAnimation)
+					inAnimation(element, done);
+				else
+					throw new Error('Animation animType not supported.'.replace(/animType/, animType));
 			},
 			leave: function(element, done) {
 				var animType = $(element).attr('anim-type');
-				if (animType.indexOf('-') != -1) {
-					var animationName = animType.split('-')[1];
-					$(element)[animationName](done);
-				} else {
-					if (animType == 'slide') {
-						slideUp(element, done)
-					} else if (animType == 'fade') {
-						$(element).fadeOut(done);
-					} else
-						throw new Error('Animation animType not supported.'.replace(/animType/, animType));
-				}
+				var outAnimation = animations[animType + 'Out'];
+				if (outAnimation)
+					outAnimation(element, done);
+				else
+					throw new Error('Animation animType not supported.'.replace(/animType/, animType));
+
 			},
 			addClass: function(element, className, done) {
 				if (className == 'ng-hide') {
 					var animType = $(element).attr('anim-type');
-					if (animType.indexOf('-') != -1) {
-						var animationName = animType.split('-')[1];
-						$(element)[animationName](done);
-					} else {
-						if (animType == 'slide') {
-							slideUp(element, done)
-						} else if (animType == 'fade') {
-							$(element).fadeOut(done);
-						} else
-							throw new Error('Animation animType not supported.'.replace(/animType/, animType));
-					}
+					var outAnimation = animations[animType + 'Out'];
+					if (outAnimation)
+						outAnimation(element, done);
+					else
+						throw new Error('Animation animType not supported.'.replace(/animType/, animType));
 				}
 			},
 			removeClass: function(element, className, done) {
 				if (className == 'ng-hide') {
-					// $(element).css('bottom', '-100%');
 					var animType = $(element).attr('anim-type');
-					if (animType.indexOf('-') != -1) {
-						var animationName = animType.split('-')[0];
-						$(element)[animationName](done);
-					} else {
-						if (animType == 'slide') {
-							slideDown(element, done)
-						} else if (animType == 'fade') {
-							$(element).fadeIn(done);
-						} else
-							throw new Error('Animation animType not supported.'.replace(/animType/, animType));
-					}
-
+					var inAnimation = animations[animType + 'In'];
+					if (inAnimation)
+						inAnimation(element, done);
+					else
+						throw new Error('Animation animType not supported.'.replace(/animType/, animType));
 				}
 			}
 		};

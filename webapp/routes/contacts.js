@@ -16,5 +16,25 @@ router.get('/', function(req, res, next) {
 	})
 });
 
+router.put('/', function(req, res, next) {
+	var newC = new contact(req.body);
+	newC.userId = req.cookies.user;
+
+	newC.validate(function(err) {
+		if (err) return next(err);
+
+		contact.update({
+			_id: newC._id,
+			userId: req.cookies.user
+		}, newC.toObject(), {
+			upsert: true
+		}, function(err, count) {
+			if(err)return next(err);
+			if(count != 1)return res.sendStatus(500);
+
+			res.sendStatus(200);
+		});
+	});
+});
 
 module.exports = router;

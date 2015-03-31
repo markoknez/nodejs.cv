@@ -1,5 +1,9 @@
-<h3>programming</h3>
+<h3>programming <small><a class="clickable" ng-click="viewEditing = !viewEditing"><span class="glyphicon glyphicon-edit"></span></a></small></h3>
 
-<p>
-	HTML, CSS, Javascript, jQuery, AngularJs, NodeJs, MongoDB, .NET, C#, MSSQL
+<p ng-show="!viewEditing">
+	{{document.languages}}<br/>
 </p>
+
+<div ng-show="viewEditing">
+	<input class="form-control" type="text" ng-model="document.languages" placeholder="html, javascript..."/>
+</div>

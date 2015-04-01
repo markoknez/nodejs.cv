@@ -85,10 +85,11 @@ app.use(function(err, req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
+    return res.send(err.message);
+    // res.render('error', {
+    //   message: err.message,
+    //   error: err
+    // });
   });
 }
 

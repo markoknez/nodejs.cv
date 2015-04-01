@@ -27,9 +27,13 @@ angular
 						templateUrl: '/templates/languages.html',
 						controller: 'languageCtrl'
 					},
-					'programming@home':{
-						templateUrl:'/templates/programming.html',
+					'programming@home': {
+						templateUrl: '/templates/programming.html',
 						controller: 'programmingCtrl'
+					},
+					'footer@home': {
+						templateUrl: '/templates/footer.html',
+						controller: 'footerCtrl'
 					}
 				}
 			});

@@ -49,18 +49,23 @@ var animations = {
 			height: 0,
 			ease: Back.easeOut,
 			onComplete: done,
-			clearProps: 'all',
-			force3D: true
+			clearProps: 'all'
 		});
 	},
 	slideOut: function(e, done) {
-		TweenMax.to(e, 0.5, {
-			height: 0,
-			ease: Back.easeOut,
-			onComplete: done,
-			clearProps: 'all',
-			force3D: true
-		});
+		var tl = new TimelineMax();
+
+		tl
+			.to(e, 0.5, {
+				scale: 0,
+				ease: Back.easeOut
+			})
+			.to(e, 0.5, {
+				height: 0,
+				ease: Back.easeOut,
+				onComplete: done,
+				clearProps: 'all'
+			});
 	}
 };
 

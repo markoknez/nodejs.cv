@@ -3,12 +3,12 @@
 		<a class="clickable" ng-click="viewCollapsed = !viewCollapsed"><span class="glyphicon glyphicon-th-list"></span></a>		
 	</small>
 	<span class="color-two"> exp</span>erience 
-	<small>
+	<small ng-show="!viewEditing">
 		<a class="clickable"><span class="glyphicon glyphicon-edit" ng-click="viewEditing = !viewEditing"></span></a>
 	</small>	
 </h2>
 <div ng-show="viewEditing">	
-	<a class="clickable" ng-click="addExperience()"><span class="glyphicon glyphicon-plus"></span>add new experience</a>
+	<button class="btn btn-xs btn-primary" ng-click="addExperience()"><span class="glyphicon glyphicon-plus"></span> Add experience</button>
 	<button class="btn btn-xs btn-danger" ng-click="cancelChanges()"><span class="glyphicon glyphicon-remove"></span> Cancel changes</button>
 	<button class="btn btn-xs btn-success" ng-click="saveChanges()"><span class="glyphicon glyphicon-ok"></span> Save changes</button>					
 </div>
@@ -30,7 +30,7 @@
 				</a>
 			</small>
 			<strong class="text-uppercase exp-title"> {{exp.title}}</strong><small class="pull-right">FER, Zagreb, Croatia</small>
-			<p class="my-animate" anim-type="jqSlide" ng-show="!viewCollapsed">
+			<div class="my-animate" anim-type="slide" ng-show="!viewCollapsed">
 				<strong class="text-uppercase">summary: </strong>{{exp.summary}}<br/>
 				<strong class="text-uppercase">implementation challenges: </strong>{{exp.implementationChallenges}}<br/>
 				<strong class="text-uppercase">what i have learned: </strong>{{exp.learned}}<br/>
@@ -38,12 +38,12 @@
 				<span ng-repeat="tech in exp.technology"><span class="label label-info">{{tech}}</span> </span><br/>
 				<strong class="text-uppercase">people working on project: </strong>{{exp.team}}<br/>
 				<strong class="text-uppercase">what i have learned: </strong>{{exp.length}}
-			</p>
+			</div>
 		</div>
 	</div>
 </div>
 
-<div class="modal fade" my-modal-show="selectedExp" my-modal-event="experience.modal.close">
+<div class="modal fade" my-modal-show="selectedExp">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header"><h4>Edit experience</h4></div>
@@ -107,6 +107,9 @@
 					</div>	
 				</form>
 			</div>		
+			<div class="modal-footer">
+				<button class="btn btn-xs btn-primary" ng-click="selectedExp = null"><span class="glyphicon glyphicon-ok"></span> Close</button>
+			</div>
 		</div>
 	</div>
 </div>

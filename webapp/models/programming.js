@@ -6,7 +6,8 @@ var schema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	languages: String
+	languages: String,
+	themes:[{title: {type: String, required: true}, text: String}]
 }, {
 	strict: true
 });

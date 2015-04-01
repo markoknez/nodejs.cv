@@ -1,19 +1,30 @@
 <h3>languages <small><a class="clickable" ng-click="viewEditing = !viewEditing"><span class="glyphicon glyphicon-edit"></span></a></small></h3>
 
-<div ng-show="!viewEditing">
+<div>
 	<div ng-repeat="lang in document.languages"><strong>{{lang.language}}</strong> - {{lang.summary}}</div>
 </div>
-<div ng-show="viewEditing">
-	<a class="clickable" ng-click="add()"><span class="glyphicon glyphicon-plus"></span></a>
-	<a class="clickable" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span></a>
-	<a class="clickable" ng-click="save()"><span class="glyphicon glyphicon-floppy-disk"></span></a>
-	<div ng-repeat="lang in document.languages" class="row">			
-		<a class="col-xs-1 clickable" ng-click="delete($index)"><span class="glyphicon glyphicon-trash"></span></a>
-		<div class="col-xs-3">			
-			<input class="form-control" placeholder="language" ng-model="lang.language"/>
-		</div>
-		<div class="col-xs-8">			
-			<input class="form-control" placeholder="summary" ng-model="lang.summary"/>
+
+<div class="modal fade text-left" my-modal-show="viewEditing">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">Edit languages data</div>
+			<div class="modal-body">				
+				<div ng-repeat="lang in document.languages" class="row">
+					<a class="col-xs-1 clickable" ng-click="delete($index)"><span class="glyphicon glyphicon-trash"></span></a>
+					<div class="col-xs-3">			
+						<input class="form-control" placeholder="language" ng-model="lang.language"/>
+					</div>
+					<div class="col-xs-8">			
+						<textarea class="form-control" placeholder="summary" ng-model="lang.summary"/>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">				
+				<button class="btn btn-xs btn-primary" ng-click="add()"><span class="glyphicon glyphicon-plus"></span> Add language</button>
+				<button class="btn btn-xs btn-success" ng-click="save()"><span class="glyphicon glyphicon-ok"></span> Save changes</button>
+				<button class="btn btn-xs btn-danger" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span> Cancel changes</button>
+			</div>
 		</div>
 	</div>
+
 </div>

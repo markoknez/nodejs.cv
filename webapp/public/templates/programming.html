@@ -1,9 +1,24 @@
 <h3>programming <small><a class="clickable" ng-click="viewEditing = !viewEditing"><span class="glyphicon glyphicon-edit"></span></a></small></h3>
 
-<p ng-show="!viewEditing">
+<p>
 	{{document.languages}}<br/>
 </p>
 
-<div ng-show="viewEditing">
-	<input class="form-control" type="text" ng-model="document.languages" placeholder="html, javascript..."/>
+
+
+<div class="modal fade text-left" my-modal-show="viewEditing">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4>Edit programming data</h4>
+			</div>
+			<div class="modal-body">
+				<textarea class="form-control" type="text" ng-model="document.languages" placeholder="html, javascript..."></textarea>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-xs btn-success" ng-click="save()"><span class="glyphicon glyphicon-ok"></span> Save changes</button>
+				<button class="btn btn-xs btn-danger" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span> Cancel changes</button>				
+			</div>
+		</div>
+	</div>
 </div>

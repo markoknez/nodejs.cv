@@ -1,18 +1,9 @@
-var _ = require('underscore');
-var mongoose = require('mongoose');
-var experience = require('./models/experience');
 
-var a = new experience({userId: 'marko'});
-a.validate(function (err){
-	if(err) return console.log(err);
 
-	console.log('no validation errors');
-})
+var x = db.programmings.findOne({themes: {$exists: true}});
 
-// mongoose.connect('mongodb://localhost/cv', function(){
-// 	console.log('database connecton open');
+x.themes.forEach(function (item){
+	item._id = new ObjectId();	
+});
 
-// 	experience.findOne(function (err, item){
-// 		console.log(item);
-// 	});
-// });
+db.programmings.save(x);

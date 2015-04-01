@@ -1,14 +1,20 @@
-<h2>
-	<span class="color-three">int</span>erests <small><span class="glyphicon glyphicon-edit"></span></small>
-</h2>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
+
+<button class="btn btn-xs btn-primary" ng-click="addTheme()"><span class="glyphicon glyphicon-ok"></span> Add theme</button>
+<div ng-repeat="theme in themes">	
+	<h2>
+		<small><a ng-click="removeTheme($index)"><span class="glyphicon glyphicon-trash"></span></a></small> 
+		<span class="color-three">{{theme.title.substr(0, 3)}}</span>{{theme.title.substr(3)}} <small><a class="clickable" ng-click="viewEditing[$index] = !viewEditing[$index]" ng-show="!viewEditing[$index]"><span class="glyphicon glyphicon-edit"></span></a></small>
+	</h2>
+	<p ng-show="!viewEditing[$index]">
+	{{theme.text}}
+	</p>
 
 
-<h2>
-	<span class="color-four">few</span> more words <small><span class="glyphicon glyphicon-edit"></span></small>
-</h2>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
+	<div ng-show="viewEditing[$index]">
+		<button class="btn btn-xs btn-success" ng-click="save($index)"><span class="glyphicon glyphicon-ok"></span> Save changes</button>
+		<button class="btn btn-xs btn-danger" ng-click="cancel($index)"><span class="glyphicon glyphicon-remove"></span> Cancel changes</button>
+		
+		<input class="form-control" ng-model="theme.title"/>
+		<textarea class="form-control" rows="5" ng-model="theme.text"></textarea>
+	</div>
+</div>

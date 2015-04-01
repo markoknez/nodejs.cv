@@ -142,13 +142,15 @@ angular
 		restrict: 'A',
 		scope: {
 			'myModalShow': '=',
-			'myModalEvent': '@'
+			'myModalClose': '&'
 		},
 		link: function(scope, element) {
 			scope.$watch('myModalShow', function(newValue) {
 				if (newValue) {
 					$(element).modal({
-						keyboard: true
+						keyboard: true,
+						show: true,
+						backdrop: 'static'
 					});
 				} else {
 					if ($(element).data('bs.modal') && $(element).data('bs.modal').isShown) {
@@ -159,7 +161,7 @@ angular
 
 			$(element).on('hide.bs.modal', function() {
 				scope.$evalAsync(function() {
-					scope.$emit(scope.myModalEvent);
+					scope.myModalClose();
 				});
 			});
 		}

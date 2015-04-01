@@ -5,13 +5,13 @@ angular
 		$scope.document = {};
 
 		$scope.refresh = function() {
-			$http.get('/programmings')
+			$http.get('/programmings/prog')
 				.then(function(response) {
-					$scope.document = response.data;
+					$scope.document.languages = response.data;
 				}, ns.errorHandler);
 		};
 		$scope.save = function() {
-			$http.put('/programmings', $scope.document)
+			$http.put('/programmings/prog', $scope.document)
 				.then(function(response) {
 					$scope.viewEditing = false;
 					ns.pushMessage('Saved successfully.', 'success');

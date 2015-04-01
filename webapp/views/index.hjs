@@ -32,6 +32,7 @@
   <script type="text/javascript" src="/javascripts/controllers/languageCtrl.js"></script>
   <script type="text/javascript" src="/javascripts/controllers/contactCtrl.js"></script>
   <script type="text/javascript" src="/javascripts/controllers/programmingCtrl.js"></script>
+  <script type="text/javascript" src="/javascripts/controllers/footerCtrl.js"></script>
   <script type="text/javascript" src="/javascripts/ioService.js"></script>
   
   <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css"/>

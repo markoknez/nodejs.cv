@@ -30,6 +30,7 @@ angular
 					ns.pushMessage('Changes saved successfully.', 'success');
 				}, ns.errorHandler);
 			$scope.selectedExp = null;
+			$scope.viewEditing = false;
 		}
 
 		$scope.addExperience = function() {
@@ -46,7 +47,7 @@ angular
 		$scope.cancelChanges = function() {
 			$scope.selectedExp = null;
 			$scope.refresh();
-			$scope.editing = false;
+			$scope.viewEditing = false;
 			ns.pushMessage('Changes cancelled.', 'info');
 		}
 

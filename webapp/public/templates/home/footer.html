@@ -1,9 +1,9 @@
 
-<button class="btn btn-xs btn-primary" ng-click="addTheme()"><span class="glyphicon glyphicon-ok"></span> Add theme</button>
+<button class="btn btn-xs btn-primary" ng-show="viewEditingFull" ng-click="addTheme()"><span class="glyphicon glyphicon-ok"></span> Add theme</button>
 <div ng-repeat="theme in themes">	
 	<h2>
-		<small><a ng-click="removeTheme($index)"><span class="glyphicon glyphicon-trash"></span></a></small> 
-		<span class="color-three">{{theme.title.substr(0, 3)}}</span>{{theme.title.substr(3)}} <small><a class="clickable" ng-click="viewEditing[$index] = !viewEditing[$index]" ng-show="!viewEditing[$index]"><span class="glyphicon glyphicon-edit"></span></a></small>
+		<small><a ng-show="viewEditingFull" ng-click="removeTheme($index)"><span class="glyphicon glyphicon-trash"></span></a></small> 
+		<span class="color-three">{{theme.title.substr(0, 3)}}</span>{{theme.title.substr(3)}} <small><a class="clickable" ng-click="viewEditing[$index] = !viewEditing[$index]" ng-show="canEdit && !viewEditing[$index]"><span class="glyphicon glyphicon-edit"></span></a></small>
 	</h2>
 	<p ng-show="!viewEditing[$index]">
 	{{theme.text}}

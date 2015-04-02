@@ -17,6 +17,10 @@ angular
 				return '';
 		}
 
+		$scope.collapseView = function(){
+			$scope.viewCollapsed = !$scope.viewCollapsed;
+		};
+
 		$scope.refresh = function() {
 			$http.get('/experiences')
 				.then(function(response) {
@@ -44,11 +48,11 @@ angular
 			$scope.selectedExp = null;
 		}
 
-		$scope.cancelChanges = function() {
+		$scope.cancelChanges = function() {			
 			$scope.selectedExp = null;
-			$scope.refresh();
 			$scope.viewEditing = false;
 			ns.pushMessage('Changes cancelled.', 'info');
+			$scope.refresh();
 		}
 
 		$scope.selectExperience = function(index) {

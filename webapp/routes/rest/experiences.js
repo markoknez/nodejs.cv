@@ -1,35 +1,35 @@
 var router = require('express').Router();
-var lang = require('../models/language');
+var experience = require('../../models/experience');
 
 router.get('/', function(req, res, next) {
-	lang.findOne({
+	experience.findOne({
 		userId: req.cookies.user
 	}, function(err, item) {
 		if (err) return next(err);
-
 		if (!item)
-			item = new lang();
+			item = new experience();
 
 		res.send(item);
 	});
 });
 
 router.put('/', function(req, res, next) {
-	var newLang = new lang(req.body);
-	newLang.userId = req.cookies.user;
+	var exp = new experience(req.body);
+	//overwrite userId with what is logged in session
+	exp.userId = req.cookies.user;
 
-	newLang.validate(function(err) {
+	exp.validate(function(err) {
 		if (err) return next(err);
 
-		lang.update({
-			_id: newLang._id,
+		experience.update({
+			_id: exp._id,
 			userId: req.cookies.user
-		}, newLang.toObject(), {
+		}, exp.toObject(), {
 			upsert: true
-		}, function(err, count) {
+		}, function(err, response) {
 			if (err) return next(err);
-			if (count != 1) return res.sendStatus(500);
-			
+			if (response != 1) return res.sendStatus(500);
+
 			res.sendStatus(200);
 		});
 	});

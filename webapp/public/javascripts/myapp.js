@@ -12,35 +12,55 @@ angular
 						controller: 'homeController'
 					},
 					'contact@home': {
-						templateUrl: '/templates/contact.html',
+						templateUrl: '/templates/home/contact.html',
 						controller: 'contactCtrl'
 					},
 					'education@home': {
-						templateUrl: '/templates/education.html',
+						templateUrl: '/templates/home/education.html',
 						controller: 'educationCtrl'
 					},
 					'experience@home': {
-						templateUrl: '/templates/experience.html',
+						templateUrl: '/templates/home/experience.html',
 						controller: 'experienceCtrl'
 					},
 					'language@home': {
-						templateUrl: '/templates/languages.html',
+						templateUrl: '/templates/home/languages.html',
 						controller: 'languageCtrl'
 					},
 					'programming@home': {
-						templateUrl: '/templates/programming.html',
+						templateUrl: '/templates/home/programming.html',
 						controller: 'programmingCtrl'
 					},
 					'footer@home': {
-						templateUrl: '/templates/footer.html',
+						templateUrl: '/templates/home/footer.html',
 						controller: 'footerCtrl'
 					}
 				}
+			})
+			.state('login', {
+				url: '/login',
+				abstract: true,
+				template: '<div ui-view></div>'
+			})
+			.state('login.signup', {
+				url:'/signup',
+				templateUrl: '/templates/login/signup.html',
+				controller: 'signupCtrl'
+			})
+			.state('login.signin', {
+				url:'/signin',
+				templateUrl: '/templates/login/signin.html'
+			})
+			.state('admin', {
+				url: '/admin',
+				templateUrl: '/templates/admin.html',
+				controller: 'adminCtrl'
 			});
 	}])
 	.controller('homeController', ['$scope', '$http', '$timeout', 'notificationService', function($scope, $http, $timeout, notificationService) {
 		$scope.apiResponse = '';
 		$scope.editing = false;
+		$scope.canEdit = true;
 
 		function refreshUsers() {
 			$http.get('/users').then(function(response) {

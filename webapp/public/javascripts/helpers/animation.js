@@ -22,9 +22,7 @@ var animations = {
 			ease: Back.easeOut,
 			margin: 0,
 			padding: 0,
-			height: 0
-				// });
-				,
+			height: 0,
 			onComplete: done,
 			clearProps: 'all',
 			force3D: true
@@ -56,8 +54,10 @@ var animations = {
 		var tl = new TimelineMax();
 
 		tl
-			.to(e, 0.5, {
+			.to(e, 0.75, {
 				scale: 0,
+				overflow: 'hidden',
+				// rotation: 360,
 				ease: Back.easeOut
 			})
 			.to(e, 0.5, {

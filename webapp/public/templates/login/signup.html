@@ -1,0 +1,22 @@
+<form name="form" novalidate ng-submit="submit()">
+	<div class="form-group">
+		<input class="form-control" type="text" required placeholder="username" name="userName" ng-model="document.userName"/>	
+	</div>
+	<div class="form-group">
+		<input class="form-control" type="text" required placeholder="first name" name="firstName" ng-model="document.firstName"/>	
+	</div>
+	<div class="form-group">
+		<input class="form-control" type="text" required placeholder="last name" name="lastName" ng-model="document.lastName"/>	
+	</div>
+	<div class="form-group">
+		<input class="form-control" type="email" required placeholder="e-mail" name="email" ng-model="document.email"/>	
+	</div>
+	<div class="form-group">
+		<input class="form-control" type="password" required placeholder="password" name="password" ng-model="document.password"/>	
+	</div>
+	<div class="form-group">
+		<input class="form-control" type="password" required placeholder="repeat password" name="passwordRepeat" ng-model="document.passwordRepeat"/>	
+	</div>
+
+	<input class="btn btn-sm btn-success" type="submit"/>
+</form>

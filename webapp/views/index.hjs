@@ -33,6 +33,7 @@
   <script type="text/javascript" src="/javascripts/controllers/contactCtrl.js"></script>
   <script type="text/javascript" src="/javascripts/controllers/programmingCtrl.js"></script>
   <script type="text/javascript" src="/javascripts/controllers/footerCtrl.js"></script>
+  <script type="text/javascript" src="/javascripts/controllers/signupCtrl.js"></script>
   <script type="text/javascript" src="/javascripts/ioService.js"></script>
   
   <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css"/>
@@ -44,7 +45,7 @@
   <div class="notification-body col-lg-4 col-md-6 col-sm-12">
     <notification-messages></notification-messages>
   </div>
-  <div ng-include="'/templates/header.html'"></div>
+  <div ng-include="'/templates/home/header.html'"></div>
   <div class="container">
    <div ui-view></div>
    <div>
@@ -52,10 +53,5 @@
      <center><p>Welcome to my curricullum vitae. This project is hosted on <a href="http://github.com/markoknez/nodejs.cv">GitHub</a>.</p></center>
    </div>
  </div>
- <script type="text/javascript">
-  $(document).ready(function (){
-    $('a[ng-click]:not(.clickable)').addClass('clickable')
-  });
- </script>
 </body>
 </html>

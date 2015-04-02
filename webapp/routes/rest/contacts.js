@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var contact = require('../models/contact');
+var contact = require('../../models/contact');
 
 router.get('/', function(req, res, next) {
 	contact.find({

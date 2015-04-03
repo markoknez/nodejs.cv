@@ -9,9 +9,10 @@ var bodyParser = require('body-parser');
 var _ = require('underscore');
 
 var routes =        require('./routes/index');
-var admin  =        require('./routes/admin');
+
 
 //--------------REST routers
+var admin  =        require('./routes/rest/admin');
 var users =         require('./routes/rest/users');
 var contacts =      require('./routes/rest/contacts');
 var educations =    require('./routes/rest/educations');
@@ -57,6 +58,7 @@ _.each(publicPaths, function(item) {
 });
 
 app.use('/', routes);
+app.use('/admin', admin);
 app.use('/users', users);
 app.use('/contacts', contacts);
 app.use('/educations', educations);

@@ -9,4 +9,11 @@ router.get('/', function(req, res, next) {
 	});
 });
 
+router.get('/test', function(req, res, next) {
+	var options = {
+		root: __dirname + '/../'
+	};
+	res.sendFile('views/test.html', options);
+});
+
 module.exports = router;

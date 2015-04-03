@@ -4,43 +4,58 @@ angular
 		$urlRouterProvider.otherwise('/home');
 
 		$stateProvider
-			.state('home', {
-				url: '/home',
+			.state('home', {				
+				url: '/home',				
 				views: {
-					'': {
-						templateUrl: '/templates/home.html',
-						controller: 'homeController'
+					header: {
+						templateUrl: '/templates/home/header.html'
 					},
-					'contact@home': {
+					body:{
+						templateUrl: '/templates/home.html',
+						controller: 'homeController'						
+					}
+				}	
+			})
+			.state('home.cv', {
+				url: '/cv',				
+				views: {
+					'contact': {
 						templateUrl: '/templates/home/contact.html',
 						controller: 'contactCtrl'
 					},
-					'education@home': {
+					'education': {
 						templateUrl: '/templates/home/education.html',
 						controller: 'educationCtrl'
 					},
-					'experience@home': {
+					'experience': {
 						templateUrl: '/templates/home/experience.html',
 						controller: 'experienceCtrl'
 					},
-					'language@home': {
+					'language': {
 						templateUrl: '/templates/home/languages.html',
 						controller: 'languageCtrl'
 					},
-					'programming@home': {
+					'programming': {
 						templateUrl: '/templates/home/programming.html',
 						controller: 'programmingCtrl'
 					},
-					'footer@home': {
+					'footer': {
 						templateUrl: '/templates/home/footer.html',
 						controller: 'footerCtrl'
 					}
 				}
 			})
 			.state('login', {
-				url: '/login',
 				abstract: true,
-				template: '<div ui-view></div>'
+				url: '/login',
+				views: {
+					header: {
+						templateUrl: '/templates/home/header.html'
+					},
+					body: {
+						template: '<div ui-view></div>'
+					}
+				}				
 			})
 			.state('login.signup', {
 				url:'/signup',

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test javascripta</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function test(response, scope){
+			this.response = response;
+			this.scope = scope;
+			console.log(response, scope);
+		}	
+		test.prototype.abc = function(scope){
+			return function(response){
+				return test(response, scope);
+			};
+		};
+
+		test('marko');
+		test.abc('knez')('marko');
+	</script>
+</body>
+</html>

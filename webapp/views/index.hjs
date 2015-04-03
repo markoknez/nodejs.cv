@@ -5,22 +5,22 @@
 
   <title>{{ title }}</title>
 
-  <script type="text/javascript" src="/jquery/dist/jquery.js"></script>
-  <script type="text/javascript" src="/jquery-ui/jquery-ui.js"></script>
+  <script type="text/javascript" src="/jquery/dist/jquery.min.js"></script>
+  <!-- <script type="text/javascript" src="/jquery-ui/jquery-ui.min.js"></script> -->
 
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
-  <script type="text/javascript" src="/gsap/src/uncompressed/jquery.gsap.js"></script>
-  <script type="text/javascript" src="/gsap/src/uncompressed/TweenMax.js"></script>
-  <script type="text/javascript" src="/gsap/src/uncompressed/TimelineMax.js"></script>
+  <script type="text/javascript" src="/gsap/src/minified/jquery.gsap.min.js"></script>
+  <script type="text/javascript" src="/gsap/src/minified/TweenMax.min.js"></script>
+  <script type="text/javascript" src="/gsap/src/minified/TimelineMax.min.js"></script>
 
-  <script type="text/javascript" src="/underscore/underscore.js"></script>
-  <script type="text/javascript" src="/bootstrap/dist/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/underscore/underscore-min.js"></script>
+  <script type="text/javascript" src="/bootstrap/dist/js/bootstrap.min.js"></script>
 
-  <script type="text/javascript" src="/angular/angular.js"></script>
-  <script type="text/javascript" src="/angular-animate/angular-animate.js"></script>
-  <script type="text/javascript" src="/angular-ui-router/release/angular-ui-router.js"></script>
-  <script type="text/javascript" src="/angular-dragdrop/src/angular-dragdrop.js"></script>
+  <script type="text/javascript" src="/angular/angular.min.js"></script>
+  <script type="text/javascript" src="/angular-animate/angular-animate.min.js"></script>
+  <script type="text/javascript" src="/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <!-- <script type="text/javascript" src="/angular-dragdrop/src/angular-dragdrop.js"></script> -->
 
 
   <script type="text/javascript" src="/javascripts/helpers/helpers.js"></script>
@@ -44,14 +44,16 @@
 <body ng-app="myapp">
   <div class="notification-body col-lg-4 col-md-6 col-sm-12">
     <notification-messages></notification-messages>
-  </div>
-  <div ng-include="'/templates/home/header.html'"></div>
-  <div class="container">
-   <div ui-view></div>
-   <div>
-     <!-- footer -->
-     <center><p>Welcome to my curricullum vitae. This project is hosted on <a href="http://github.com/markoknez/nodejs.cv">GitHub</a>.</p></center>
-   </div>
+  </div>  
+  <div class="container-fluid header">
+    <div ui-view="header"></div>
+  </div>  
+  <div class="container">    
+    <div ui-view="body"></div>
+    <div>
+      <!-- footer -->
+      <center><p>Welcome to my curricullum vitae. This project is hosted on <a href="http://github.com/markoknez/nodejs.cv">GitHub</a>.</p></center>
+    </div>
  </div>
 </body>
 </html>

@@ -4,9 +4,9 @@
 	<title>test javascripta</title>
 </head>
 <body>
-	<script type="text/javascript">
-		function test(response, scope){
-			this.response = response;
+	<script type="text/javascript">	
+		var test = function (response, scope){
+			this.response = response;			
 			this.scope = scope;
 			console.log(response, scope);
 		}	

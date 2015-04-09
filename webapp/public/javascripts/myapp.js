@@ -1,7 +1,7 @@
 angular
 	.module('myapp', ['ui.router', 'myAnimate', 'helpers'])
 	.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
-		$urlRouterProvider.otherwise('/home');
+		$urlRouterProvider.otherwise('/home/cv');
 
 		$stateProvider
 			.state('home', {				

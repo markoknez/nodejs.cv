@@ -17,7 +17,8 @@
 	<div ng-repeat="exp in document.experiences">
 		<div class="row">			
 			<div class="col-xs-2">
-				<span class="pull-right">								
+				<span class="pull-right">		
+					<a class="clickable my-move"><span class="glyphicon glyphicon-move"></span></a>
 					<a ng-show="viewEditing" ng-click="deleteExperience($index)" class="clickable">
 						<span class="glyphicon glyphicon-trash"></span>
 					</a>
@@ -135,3 +136,9 @@
 		</li>
 	</ul>
 </div> -->
+
+<script type="text/javascript">
+	$('body').bind('.my-move', 'mousedown', function(event){
+		alert('test');
+	});
+</script>

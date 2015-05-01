@@ -57,7 +57,7 @@ var animations = {
 
 		tl
 			.to(e, 0.5, {
-				scale: 0,
+				scaleY: 0,
 				ease: Back.easeOut
 			})
 			.to(e, 0.5, {

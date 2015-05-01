@@ -1,0 +1,144 @@
+<h2>
+	<small>
+		<a class="clickable" ng-click="collapseView()"><span class="glyphicon glyphicon-th-list"></span></a>		
+	</small>
+	<span class="color-two"> exp</span>erience 
+	<small ng-show="!viewEditing">
+		<a class="clickable"><span class="glyphicon glyphicon-edit" ng-show="canEdit" ng-click="viewEditing = !viewEditing"></span></a>
+	</small>	
+</h2>
+<div ng-show="viewEditing">	
+	<button class="btn btn-xs btn-primary" ng-click="addExperience()"><span class="glyphicon glyphicon-plus"></span> Add experience</button>
+	<button class="btn btn-xs btn-danger" ng-click="cancelChanges()"><span class="glyphicon glyphicon-remove"></span> Cancel changes</button>
+	<button class="btn btn-xs btn-success" ng-click="saveChanges()"><span class="glyphicon glyphicon-ok"></span> Save changes</button>					
+</div>
+
+<div>	
+	<div ng-repeat="exp in document.experiences">
+		<div class="row">			
+			<div class="col-xs-2">
+				<span class="pull-right">		
+					<a class="clickable my-move"><span class="glyphicon glyphicon-move"></span></a>
+					<a ng-show="viewEditing" ng-click="deleteExperience($index)" class="clickable">
+						<span class="glyphicon glyphicon-trash"></span>
+					</a>
+					{{exp.duration.from}}-{{exp.duration.to}}
+				</span>
+			</div>
+			<div class="col-xs-10">
+				<small>
+					<a ng-show="viewEditing" ng-click="selectExperience($index)" class="clickable">				
+						<span class="glyphicon glyphicon-edit"></span>
+					</a>
+				</small>
+				<strong class="text-uppercase exp-title"> {{exp.title}}</strong>
+				<small class="pull-right">FER, Zagreb, Croatia</small>
+			</div>
+		</div>
+		<div class="row" ng-show="!viewCollapsed">
+			<!-- class="row my-animate" anim-type="slide" ng-show="!viewCollapsed" -->			
+			<div class="col-xs-offset-2 col-xs-10">				
+				<strong class="text-uppercase">summary: </strong>{{exp.summary}}<br/>
+				<strong class="text-uppercase">implementation challenges: </strong>{{exp.implementationChallenges}}<br/>
+				<strong class="text-uppercase">what i have learned: </strong>{{exp.learned}}<br/>
+				<strong class="text-uppercase">tehnologies used: </strong>
+				<span ng-repeat="tech in exp.technology"><span class="label label-info">{{tech}}</span> </span><br/>
+				<strong class="text-uppercase">people working on project: </strong>{{exp.team}}<br/>
+				<strong class="text-uppercase">what i have learned: </strong>{{exp.length}}
+			</div>		
+		</div>
+	</div>
+
+	<div class="modal fade" my-modal-show="selectedExp">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header"><h4>Edit experience</h4></div>
+				<div class="modal-body">
+					<form name="form" novalidate>
+						<div class="panel panel-default" ng-show="selectedExp">
+							<div class="panel-body">			
+
+								<!-- FIELDS title / from / to -->
+								<div class="row">
+									<div class="col-md-6 form-group">
+										<label class="control-label">title</label>
+										<input class="form-control input-sm" type="text" ng-model="selectedExp.title" required my-validation-tooltip/>
+									</div>
+									<div class="col-md-3 form-group">
+										<label class="control-label">from</label>
+										<input class="form-control input-sm" type="number" ng-model="selectedExp.duration.from" required my-validation-tooltip/>
+									</div>
+									<div class="col-md-3 form-group">
+										<label class="control-label">to</label>
+										<input class="form-control input-sm" type="number" ng-model="selectedExp.duration.to" required my-validation-tooltip/>
+									</div>
+								</div>
+
+								<!-- FIELDS summary / implementation challenges -->
+								<div class="row">
+									<div class="col-md-6 form-group">
+										<label class="control-label">summary</label>
+										<textarea class="form-control input-sm" rows="5" ng-model="selectedExp.summary"></textarea>			
+									</div>
+									<div class="col-md-6 form-group">
+										<label class="control-label">implementation challenges</label>
+										<textarea class="form-control input-sm" rows="5" ng-model="selectedExp.implementationChallenges"></textarea>
+									</div>
+								</div>
+
+								<!-- FIELDS what i have learned / tehnologies -->				
+								<div class="row">
+									<div class="col-md-6 form-group">
+										<label class="control-label">what i have learned</label>
+										<textarea class="form-control input-sm" rows="5" ng-model="selectedExp.learned"></textarea>
+									</div>
+									<div class="col-md-6 form-group">
+										<label class="control-label">people working on the project</label>
+										<textarea class="form-control input-sm" rows="5" ng-model="selectedExp.team"></textarea>
+									</div>				
+								</div>	
+								<div class="row">
+									<div class="col-md-12 form-group">
+										<label class="control-label">technologies used</label>
+										<input class="form-control" type="text" ng-model="technologySetter" ng-model-options="{getterSetter: true}"/>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 form-group">
+										<label class="control-label">project duration</label>
+										<input class="form-control input-sm" type="text" ng-model="selectedExp.length"/>
+									</div>
+								</div>		
+							</div>
+						</div>	
+					</form>
+				</div>		
+				<div class="modal-footer">
+					<button class="btn btn-xs btn-primary" ng-click="selectedExp = null"><span class="glyphicon glyphicon-ok"></span> Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- <div ng-show="false">
+	<ul class="list-group">
+		<li class="list-group-item">
+			<button class="btn btn-xs btn-primary" ng-click="addExperience()"><span class="glyphicon glyphicon-plus"></span> Add new</button>		
+			<button class="btn btn-xs btn-danger" ng-click="cancelChanges()"><span class="glyphicon glyphicon-remove"></span> Cancel changes</button>
+			<button class="btn btn-xs btn-success" ng-click="saveChanges()"><span class="glyphicon glyphicon-ok"></span> Save changes</button>
+		</li>
+		<li class="list-group-item" ng-repeat="exp in document.experiences">
+			<span class="badge">{{exp.duration.from}} / {{exp.duration.to}}</span>
+			<div>
+				<button class="btn btn-xs btn-danger" ng-click="deleteExperience($index)"><span class="glyphicon glyphicon-trash"></span></button>
+				<button class="btn btn-xs btn-default" ng-click="selectExperience($index)"><span class="glyphicon glyphicon-edit"></span></button> {{exp.title}}
+			</div>
+		</li>
+	</ul>
+</div> -->
+
+<script type="text/javascript">
+	$('body').bind('.my-move', 'mousedown', function(event){
+		alert('test');
+	});
+</script>

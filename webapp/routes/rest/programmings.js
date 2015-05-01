@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var pro = require('../models/programming');
+var pro = require('../../models/programming');
 var _ = require('underscore');
 
 

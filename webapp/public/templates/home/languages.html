@@ -1,4 +1,4 @@
-<h3>languages <small><a class="clickable" ng-click="viewEditing = !viewEditing"><span class="glyphicon glyphicon-edit"></span></a></small></h3>
+<h3>languages <small><a class="clickable" ng-show="canEdit" ng-click="viewEditing = !viewEditing"><span class="glyphicon glyphicon-edit"></span></a></small></h3>
 
 <div>
 	<div ng-repeat="lang in document.languages"><strong>{{lang.language}}</strong> - {{lang.summary}}</div>

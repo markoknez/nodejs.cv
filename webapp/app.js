@@ -8,13 +8,17 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var _ = require('underscore');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var contacts = require('./routes/contacts');
-var educations = require('./routes/educations');
-var experiences = require('./routes/experiences');
-var languages = require('./routes/languages');
-var programmings = require('./routes/programmings');
+var routes =        require('./routes/index');
+
+
+//--------------REST routers
+var admin  =        require('./routes/rest/admin');
+var users =         require('./routes/rest/users');
+var contacts =      require('./routes/rest/contacts');
+var educations =    require('./routes/rest/educations');
+var experiences =   require('./routes/rest/experiences');
+var languages =     require('./routes/rest/languages');
+var programmings =  require('./routes/rest/programmings');
 
 app.io = require('socket.io')();
 
@@ -54,6 +58,7 @@ _.each(publicPaths, function(item) {
 });
 
 app.use('/', routes);
+app.use('/admin', admin);
 app.use('/users', users);
 app.use('/contacts', contacts);
 app.use('/educations', educations);

@@ -1,11 +1,11 @@
-<h3>contact <small><a class="clickable" ng-click="viewEditing = !viewEditing"><span class="glyphicon glyphicon-edit"></span></a></small></h3>
+<h3>contact <small><a class="clickable" ng-show="canEdit" ng-click="viewEditing = !viewEditing"><span class="glyphicon glyphicon-edit"></span></a></small></h3>
 
 <div>
-	<p>{{document.email}}</p>
+	<p ng-show="document.email">{{document.email}}</p>
 	<p>
-	{{document.location.address}}<br/>
-	{{document.location.city}}, {{document.location.zip}}<br/>
-	{{document.location.state}}<br/>
+	<span ng-show="document.location.address">{{document.location.address}}<br/></span>
+	<span ng-show="document.location.city || document.location.zip">{{document.location.city}}, {{document.location.zip}}<br/></span>
+	<span ng-show="document.location.state">{{document.location.state}}<br/></span>
 	</p>
 	<div ng-repeat="link in document.links">
 		<a href="{{link.url}}" target="_blank">{{link.name}}</a>
@@ -19,6 +19,10 @@
 				<h4>Edit contact data</h4>
 			</div>
 			<div class="modal-body">
+				<input class="form-control" type="text" placeholder="first name" ng-model="document.firstName"/>
+				<input class="form-control" type="text" placeholder="last name" ng-model="document.lastName"/>
+				<input class="form-control" type="text" placeholder="position" ng-model="document.position"/>
+
 				<input class="form-control" type="text" placeholder="email" ng-model="document.email"/>
 				<input class="form-control" type="text" placeholder="address" ng-model="document.location.address"/>
 				<input class="form-control" type="text" placeholder="city" ng-model="document.location.city"/>

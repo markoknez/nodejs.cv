@@ -1,9 +1,9 @@
 
 
-var x = db.programmings.findOne({themes: {$exists: true}});
+var x = db.users.find({}).toArray(0);
 
-x.themes.forEach(function (item){
-	item._id = new ObjectId();	
+x.forEach(function (item){
+	item.userId = item.email;
+	db.users.save(item);
 });
 
-db.programmings.save(x);

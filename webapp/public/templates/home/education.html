@@ -1,9 +1,9 @@
 
 <h2>
-	<span class="color-one">edu</span>cation <small><span class="glyphicon glyphicon-edit" ng-click="editing = !editing"></span></small>
+	<span class="color-one">edu</span>cation <small><a class="clickable" ng-show="canEdit" ng-click="editing = !editing"><span class="glyphicon glyphicon-edit"></span></a></small>
 </h2>
 
-<div ng-show="!editing" class="row">
+<div ng-show="!editing && (document.title || document.thesis)" class="row">
 	<div class="col-xs-2"><span class="pull-right">{{document.duration.from}}-{{document.duration.to}}</span></div>
 	<div class="col-xs-10">
 		<strong class="text-uppercase">{{document.title}}</strong><small class="pull-right">{{document.location}}</small>		

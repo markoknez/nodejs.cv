@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var education = require('../models/education');
+var education = require('../../models/education');
 
 router.get('/', function(req, res, next) {
 	education.findOne({

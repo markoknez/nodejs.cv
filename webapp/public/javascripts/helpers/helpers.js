@@ -53,6 +53,11 @@ angular
 		else
 			self.pushMessage(errResponse.data, 'danger');
 	}
+	self.errorHandler.test = function(scope){
+		return function(errResponse){
+			self.errorHandler(errResponse, scope);
+		};
+	};
 
 	self.handleValidationError = function(errResponse, scope) {
 		_.each(errResponse.data.errors, function(value, key) {

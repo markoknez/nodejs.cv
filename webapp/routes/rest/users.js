@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var user = require('../models/user');
+var user = require('../../models/user');
 var _ = require('underscore');
 
 /* GET users listing. */

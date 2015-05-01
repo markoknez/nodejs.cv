@@ -1,46 +1,81 @@
 angular
 	.module('myapp', ['ui.router', 'myAnimate', 'helpers'])
 	.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
-		$urlRouterProvider.otherwise('/home');
+		$urlRouterProvider.otherwise('/home/cv');
 
 		$stateProvider
-			.state('home', {
-				url: '/home',
+			.state('home', {				
+				url: '/home',				
 				views: {
-					'': {
-						templateUrl: '/templates/home.html',
-						controller: 'homeController'
+					header: {
+						templateUrl: '/templates/home/header.html'
 					},
-					'contact@home': {
-						templateUrl: '/templates/contact.html',
+					body:{
+						templateUrl: '/templates/home.html',
+						controller: 'homeController'						
+					}
+				}	
+			})
+			.state('home.cv', {
+				url: '/cv',				
+				views: {
+					'contact': {
+						templateUrl: '/templates/home/contact.html',
 						controller: 'contactCtrl'
 					},
-					'education@home': {
-						templateUrl: '/templates/education.html',
+					'education': {
+						templateUrl: '/templates/home/education.html',
 						controller: 'educationCtrl'
 					},
-					'experience@home': {
-						templateUrl: '/templates/experience.html',
+					'experience': {
+						templateUrl: '/templates/home/experience.html',
 						controller: 'experienceCtrl'
 					},
-					'language@home': {
-						templateUrl: '/templates/languages.html',
+					'language': {
+						templateUrl: '/templates/home/languages.html',
 						controller: 'languageCtrl'
 					},
-					'programming@home': {
-						templateUrl: '/templates/programming.html',
+					'programming': {
+						templateUrl: '/templates/home/programming.html',
 						controller: 'programmingCtrl'
 					},
-					'footer@home': {
-						templateUrl: '/templates/footer.html',
+					'footer': {
+						templateUrl: '/templates/home/footer.html',
 						controller: 'footerCtrl'
 					}
 				}
+			})
+			.state('login', {
+				abstract: true,
+				url: '/login',
+				views: {
+					header: {
+						templateUrl: '/templates/home/header.html'
+					},
+					body: {
+						template: '<div ui-view></div>'
+					}
+				}				
+			})
+			.state('login.signup', {
+				url:'/signup',
+				templateUrl: '/templates/login/signup.html',
+				controller: 'signupCtrl'
+			})
+			.state('login.signin', {
+				url:'/signin',
+				templateUrl: '/templates/login/signin.html'
+			})
+			.state('admin', {
+				url: '/admin',
+				templateUrl: '/templates/admin.html',
+				controller: 'adminCtrl'
 			});
 	}])
 	.controller('homeController', ['$scope', '$http', '$timeout', 'notificationService', function($scope, $http, $timeout, notificationService) {
 		$scope.apiResponse = '';
 		$scope.editing = false;
+		$scope.canEdit = true;
 
 		function refreshUsers() {
 			$http.get('/users').then(function(response) {

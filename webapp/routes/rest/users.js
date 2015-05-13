@@ -43,9 +43,9 @@ router.put('/:userId', function(req, res, next) {
 		$inc: {
 			hitCount: 1
 		}
-	}, function(err, result) {
+	}, function(err, raw) {
 		if (err) return next(err);
-		if (result == 0) return res.sendStatus(404);
+		if (raw.n == 0) return res.sendStatus(404);
 
 		res.sendStatus(200);
 	});

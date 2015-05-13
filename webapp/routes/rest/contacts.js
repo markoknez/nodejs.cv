@@ -28,9 +28,9 @@ router.put('/', function(req, res, next) {
 			userId: req.cookies.user
 		}, newC.toObject(), {
 			upsert: true
-		}, function(err, count) {
+		}, function(err, raw) {
 			if(err)return next(err);
-			if(count != 1)return res.sendStatus(500);
+			if(raw.n != 1)return res.sendStatus(500);
 
 			res.sendStatus(200);
 		});

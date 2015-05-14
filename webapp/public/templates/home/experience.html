@@ -39,12 +39,12 @@
 			<!-- class="row my-animate" anim-type="slide" ng-show="!viewCollapsed" -->			
 			<div class="col-xs-offset-2 col-xs-10">				
 				<strong class="text-uppercase">summary: </strong>{{exp.summary}}<br/>
-				<strong class="text-uppercase">implementation challenges: </strong>{{exp.implementationChallenges}}<br/>
-				<strong class="text-uppercase">what i have learned: </strong>{{exp.learned}}<br/>
+				<strong class="text-uppercase" ng-show="exp.implementationChallenges">implementation challenges: </strong>{{exp.implementationChallenges}}<br/>
+				<strong class="text-uppercase" ng-show="exp.learned">what i have learned: </strong>{{exp.learned}}<br/>
 				<strong class="text-uppercase">tehnologies used: </strong>
 				<span ng-repeat="tech in exp.technology"><span class="label label-info">{{tech}}</span> </span><br/>
-				<strong class="text-uppercase">people working on project: </strong>{{exp.team}}<br/>
-				<strong class="text-uppercase">what i have learned: </strong>{{exp.length}}
+				<strong class="text-uppercase" ng-show="exp.team">people working on project: </strong>{{exp.team}}<br/>
+				<strong class="text-uppercase" ng-show="exp.length">what i have learned: </strong>{{exp.length}}
 			</div>		
 		</div>
 	</div>

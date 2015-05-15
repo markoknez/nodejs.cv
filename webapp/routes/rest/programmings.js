@@ -4,9 +4,9 @@ var _ = require('underscore');
 
 
 
-router.get('/prog', function(req, res, next) {
+router.get('/prog/:userId', function(req, res, next) {
 	pro.findOne({
-		userId: req.cookies.user
+		userId: req.params.userId
 	}, function(err, item) {
 		if (err) return next(err);
 		if (!item) return res.status(200).send(null);
@@ -17,7 +17,7 @@ router.get('/prog', function(req, res, next) {
 
 router.put('/prog', function(req, res, next) {
 	pro.update({
-		userId: req.cookies.user
+		userId: req.user.email
 	}, {
 		$set: {
 			languages: req.body.languages
@@ -32,9 +32,9 @@ router.put('/prog', function(req, res, next) {
 	});
 });
 
-router.get('/themes', function(req, res, next) {
+router.get('/themes/:userId', function(req, res, next) {
 	pro.findOne({
-		userId: req.cookies.user
+		userId: req.params.userId
 	}, {
 		themes: 1
 	}, function(err, doc) {
@@ -45,9 +45,9 @@ router.get('/themes', function(req, res, next) {
 	});
 });
 
-router.get('/themes/:id', function(req, res, next) {
+router.get('/themes/:userId/:id', function(req, res, next) {
 	pro.findOne({
-		userId: req.cookies.user,
+		userId: req.params.userId,
 		'themes._id': req.params.id
 	}, {
 		'themes.$': 1
@@ -67,13 +67,13 @@ router.put('/themes', function(req, res, next) {
 	}
 
 	pro.findOne({
-		userId: req.cookies.user
+		userId: req.user.email
 	}, function(err, doc) {
 		if (err) return next(err);
 		if (!doc) {
 			//insert new one
 			var newP = new pro();
-			newP.userId = req.cookies.user;
+			newP.userId = req.user.email;
 			newP.themes.push(req.body);
 			newP.save(handleResponse);			
 		} else {
@@ -94,7 +94,7 @@ router.put('/themes', function(req, res, next) {
 
 router.delete('/themes/:id', function(req, res, next) {
 	pro.findOne({
-		userId: req.cookies.user
+		userId: req.user.email
 	}, function(err, doc){
 		if(err)return next(err);
 		if(!doc)return res.sendStatus(404);
@@ -107,7 +107,7 @@ router.delete('/themes/:id', function(req, res, next) {
 		});
 	});
 	// pro.update({
-	// 	userId: req.cookies.user,
+	// 	userId: req.user.email,
 	// }, {
 	// 	$pull: {
 	// 		'themes._id': req.params.id
@@ -118,7 +118,7 @@ router.delete('/themes/:id', function(req, res, next) {
 	// 	if (count == 0) return res.sendStatus(404);
 
 	// 	pro.update({
-	// 		userId: req.cookies.user,
+	// 		userId: req.user.email,
 	// 	}, {
 	// 		$pull: {
 	// 			'themes': null

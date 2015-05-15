@@ -1,6 +1,6 @@
 angular
 	.module('myapp')
-	.controller('footerCtrl', ['$scope', '$http', 'notificationService', function($scope, $http, ns) {
+	.controller('footerCtrl', ['$scope', '$stateParams', '$http', 'notificationService', function($scope, $stateParams, $http, ns) {
 		$scope.themes = [];
 		$scope.viewEditing = [];
 
@@ -24,7 +24,7 @@ angular
 		};
 
 		$scope.refreshAll = function() {
-			$http.get('/programmings/themes')
+			$http.get('/programmings/themes/' + $stateParams.userId)
 				.then(function(response) {
 					if (response.data)
 						$scope.themes = response.data;
@@ -32,7 +32,7 @@ angular
 		};
 		$scope.refresh = function(index) {
 			var theme = $scope.themes[index];
-			$http.get('/programmings/themes/' + theme._id)
+			$http.get('/programmings/themes/' + $stateParams.userId + '/' + theme._id)
 				.then(function(response) {
 					$scope.themes[index] = response.data;
 				}, ns.errorHandler);

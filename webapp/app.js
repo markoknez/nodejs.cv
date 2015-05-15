@@ -4,31 +4,36 @@ var app = express();
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var log = require('./helpers/logger')('app');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var _ = require('underscore');
 
-var routes =        require('./routes/index');
+var routes = require('./routes/index');
+var passport = require('./routes/passportHelper');
+
+//session store
+var session = require('express-session');
+var sessionStore = require('connect-mongo')(session);
+var sessionStoreConnection = require('mongoose').connection;
 
 
 //--------------REST routers
-var admin  =        require('./routes/rest/admin');
-var users =         require('./routes/rest/users');
-var contacts =      require('./routes/rest/contacts');
-var educations =    require('./routes/rest/educations');
-var experiences =   require('./routes/rest/experiences');
-var languages =     require('./routes/rest/languages');
-var programmings =  require('./routes/rest/programmings');
+var admin = require('./routes/rest/admin');
+var users = require('./routes/rest/users');
+var contacts = require('./routes/rest/contacts');
+var educations = require('./routes/rest/educations');
+var experiences = require('./routes/rest/experiences');
+var languages = require('./routes/rest/languages');
+var programmings = require('./routes/rest/programmings');
 
-app.io = require('socket.io')();
 
-//socket io engine setup
-app.io.on('connect', function(socket) {
-  console.log('connect');
-  socket.on('disconnect', function() {
-    console.log('disconnect');
-  });
-});
+//open paths to public access
+var publicPaths = [{
+  from: 'public'
+}, {
+  from: 'bower_components'
+}];
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,25 +41,40 @@ app.set('view engine', 'hjs');
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
-app.use(cookieParser());
-//open paths to public access
-//TODO: restric access to only JS and CSS files
-var publicPaths = [{
-  from: 'public',
-  to: null
-}, {
-  from: 'bower_components',
-  to: null
-}];
+
 _.each(publicPaths, function(item) {
   if (!item.to)
     app.use(express.static(path.join(__dirname, item.from)));
   else
     app.use(item.to, express.static(path.join(__dirname, item.from)));
+});
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+app.use(cookieParser());
+
+app.use(session({
+  secret: '0efa268a-ab82-4534-9c96-758f4dea6d88',
+  store: new sessionStore({
+    mongooseConnection: sessionStoreConnection
+  })
+}));
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(function (req, res, next){
+  if(req.user){
+    //log.info('User detected:', {user: req.user});    
+    res.cookie('username', req.user.email);
+  }else{
+    res.clearCookie('username');
+  }
+  next();
 });
 
 app.use('/', routes);

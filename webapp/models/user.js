@@ -13,6 +13,16 @@ var userSchema = new mongoose.Schema({
 	strict: true //save only schema fields
 });
 
+/**
+ * Validates user password according to instance
+ * @param  {String} password 	- Password to validate
+ * @return {Boolean}          	- Result if password is valid
+ */
+userSchema.methods.validatePassword = function (password){
+	return this.password === password;
+}
+
 var User = mongoose.model('user', userSchema);
+
 
 module.exports = User;

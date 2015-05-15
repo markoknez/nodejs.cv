@@ -1,14 +1,24 @@
 angular
 	.module('myapp', ['ui.router', 'myAnimate', 'helpers'])
+	.run(['$rootScope', 'AUTH_EVENTS', 'AuthService', function($rootScope, AUTH_EVENTS, AuthService) {
+		$rootScope.$on('$stateChangedStart', function(event, next) {
+			//user not logged in
+			if(!AuthService.isAuthenticated()){
+				event.preventDefault();
+				$rootScope.$broadcast('AUTH_EVENTS.notAuthenticated');
+			}
+		});
+	}])
 	.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
 		$urlRouterProvider.otherwise('/home/cv');
 
 		$stateProvider
 			.state('home', {
-				url: '/home',
+				url: '/home/:userId',
 				views: {
 					header: {
-						templateUrl: '/templates/home/header.html'
+						templateUrl: '/templates/home/header.html',
+						controller: 'headerCtrl'
 					},
 					body: {
 						templateUrl: '/templates/home.html',
@@ -50,7 +60,8 @@ angular
 				url: '/login',
 				views: {
 					header: {
-						templateUrl: '/templates/home/header.html'
+						templateUrl: '/templates/home/header.html',
+						controller: 'headerCtrl'
 					},
 					body: {
 						template: '<div ui-view></div>'
@@ -72,72 +83,20 @@ angular
 				controller: 'adminCtrl'
 			});
 	}])
-	.controller('homeController', ['$scope', '$http', '$timeout', 'notificationService', function($scope, $http, $timeout, notificationService) {
+	.controller('homeController', ['$scope', '$http', '$timeout', 'notificationService', function($scope, $http, $timeout, $notify) {
 		$scope.apiResponse = '';
 		$scope.editing = false;
-		$scope.canEdit = true;
-
-		document.cookie.split('; ').forEach(function(item) {
-			var parts = item.split('=');
-			if (parts[0] === 'canEdit') {
-				$scope.canEdit = (parts[1] === 'true');
-			}
-		})
-
-		function refreshUsers() {
-			$http.get('/users').then(function(response) {
-				$scope.users = response.data;
-			}, notificationService.errorHandler);
-		}
-
-		$scope.submit = function() {
-			$http.post('/users', {
-				name: $scope.name,
-				email: $scope.email
-			}).then(function(response) {
-				$scope.apiResponse = response.data;
-				$timeout(function() {
-					$scope.apiResponse = '';
-					$scope.name = '';
-					$scope.email = '';
-				}, 2000);
-				refreshUsers();
-			}, notificationService.errorHandler);
-		};
-
-		$scope.hit = function(id) {
-			$http.put('/users/' + id)
-				.then(function(response) {
-					refreshUsers();
-				}, notificationService.errorHandler);
-		}
-
-		$scope.deleteUser = function(id) {
-			$http.delete('/users/' + id)
-				.then(function(response) {
-					refreshUsers();
-				}, notificationService.errorHandler);
-		}
-
-		//load all elements for displaying
-		$http.get('/contacts').then(function(response) {
-			$scope.contact = response.data;
-		}, notificationService.errorHandler);
-		$http.get('/educations').then(function(response) {
-			$scope.education = response.data;
-		}, notificationService.errorHandler);
-		$http.get('/experiences').then(function(response) {
-			$scope.experience = response.data;
-		}, notificationService.errorHandler);
-
-
-		refreshUsers();
+		$scope.canEdit = true;		
 	}])
-	.controller('headerCtrl', ['$scope', '$http', 'notificationService', function($scope, $http, ns) {
+	.controller('headerCtrl', ['$scope', '$stateParams', '$http', 'notificationService', 'AuthService', function($scope, $stateParams, $http, ns, $authService) {
 		$scope.document = {};
 
-		$http.get('/contacts')
+		$http.get('/contacts/' + $stateParams.userId)
 			.then(function(response) {
 				$scope.document = response.data;
 			}, ns.errorHadler);
+
+		$scope.logout = function(){
+			$authService.logoutAsync();
+		};
 	}]);

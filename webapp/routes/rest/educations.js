@@ -1,9 +1,9 @@
 var router = require('express').Router();
 var education = require('../../models/education');
 
-router.get('/', function(req, res, next) {
+router.get('/:userId', function(req, res, next) {
 	education.findOne({
-		userId: req.cookies.user
+		userId: req.params.userId
 	}, function(err, item) {
 		if (err) return next(err);
 		if (!item)
@@ -16,14 +16,14 @@ router.get('/', function(req, res, next) {
 router.put('/', function(req, res, next) {
 	var edu = new education(req.body);
 	//overwrite userId with what is logged in session
-	edu.userId = req.cookies.user;
+	edu.userId = req.user.email;
 
 	edu.validate(function(err) {
 		if (err) return next(err);
 
 		education.update({
 			_id: req.body._id,
-			userId: req.cookies.user
+			userId: req.user.email
 		}, edu.toObject(), {
 			upsert: true
 		}, function(err, raw) {

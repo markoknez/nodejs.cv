@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 var contact = require('../../models/contact');
 
-router.get('/', function(req, res, next) {
+router.get('/:userId', function(req, res, next) {
 	contact.find({
-		userId: req.cookies.user
+		userId: req.params.userId
 	}, function(err, items) {
 		if (err) return next(err);
 		var item;
@@ -18,14 +18,14 @@ router.get('/', function(req, res, next) {
 
 router.put('/', function(req, res, next) {
 	var newC = new contact(req.body);
-	newC.userId = req.cookies.user;
+	newC.userId = req.user.email;
 
 	newC.validate(function(err) {
 		if (err) return next(err);
 
 		contact.update({
 			_id: newC._id,
-			userId: req.cookies.user
+			userId: req.user.email
 		}, newC.toObject(), {
 			upsert: true
 		}, function(err, raw) {

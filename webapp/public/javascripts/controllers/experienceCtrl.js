@@ -1,6 +1,6 @@
 angular
 	.module('myapp')
-	.controller('experienceCtrl', ['$scope', '$http', 'notificationService', function($scope, $http, ns) {
+	.controller('experienceCtrl', ['$scope', '$stateParams', '$http', 'notificationService', function($scope, $stateParams, $http, ns) {
 		$scope.document = {};
 		$scope.editing = true;
 		$scope.selectedExp = null;
@@ -22,7 +22,7 @@ angular
 		};
 
 		$scope.refresh = function() {
-			$http.get('/experiences')
+			$http.get('/experiences/' + $stateParams.userId)
 				.then(function(response) {
 					$scope.document = response.data;
 				}, ns.errorHandler);

@@ -1,9 +1,9 @@
 var router = require('express').Router();
 var experience = require('../../models/experience');
 
-router.get('/', function(req, res, next) {
+router.get('/:userId', function(req, res, next) {
 	experience.findOne({
-		userId: req.cookies.user
+		userId: req.params.userId
 	}, function(err, item) {
 		if (err) return next(err);
 		if (!item)
@@ -16,14 +16,14 @@ router.get('/', function(req, res, next) {
 router.put('/', function(req, res, next) {
 	var exp = new experience(req.body);
 	//overwrite userId with what is logged in session
-	exp.userId = req.cookies.user;
+	exp.userId = req.user.email;
 
 	exp.validate(function(err) {
 		if (err) return next(err);
 
 		experience.update({
 			_id: exp._id,
-			userId: req.cookies.user
+			userId: req.user.email
 		}, exp.toObject(), {
 			upsert: true
 		}, function(err, raw) {

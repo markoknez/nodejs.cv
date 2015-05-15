@@ -1,11 +1,11 @@
 angular
 	.module('myapp')
-	.controller('educationCtrl', ['$scope', '$http', 'notificationService', function($scope, $http, ns) {
+	.controller('educationCtrl', ['$scope', '$stateParams', '$http', 'notificationService', function($scope, $stateParams, $http, ns) {
 		$scope.editing = false;
 		$scope.document = {};
 
 		$scope.refresh = function() {
-			$http.get('/educations')
+			$http.get('/educations/' + $stateParams.userId)
 				.then(function(response) {
 					$scope.document = response.data;
 				}, ns.errorHandler2($scope));

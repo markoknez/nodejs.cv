@@ -1,6 +1,6 @@
 angular
 	.module('myapp')
-	.controller('languageCtrl', ['$scope', '$http', 'notificationService', function($scope, $http, ns) {
+	.controller('languageCtrl', ['$scope', '$stateParams', '$http', 'notificationService', function($scope, $stateParams, $http, ns) {
 		$scope.viewEditing = false;
 		$scope.document = {
 			languages: []
@@ -8,7 +8,7 @@ angular
 
 		//refresh language section from database
 		$scope.refresh = function() {
-			$http.get('/languages')
+			$http.get('/languages/' + $stateParams.userId)
 				.then(function(response) {
 					$scope.document = response.data;
 				}, ns.errorHandler);

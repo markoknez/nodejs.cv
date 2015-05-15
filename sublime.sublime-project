@@ -1,0 +1,9 @@
+{
+	"folders":
+	[
+		{
+			"path": "d:\\markok\\Project\\nodejs.cv\\webapp",
+			"folder_exclude_patterns": ["node_modules", "bower_components"]
+		}
+	]
+}

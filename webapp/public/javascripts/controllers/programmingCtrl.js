@@ -1,11 +1,11 @@
 angular
 	.module('myapp')
-	.controller('programmingCtrl', ['$scope', '$http', 'notificationService', function($scope, $http, ns) {
+	.controller('programmingCtrl', ['$scope', '$stateParams', '$http', 'notificationService', function($scope, $stateParams, $http, ns) {
 		$scope.viewEditing = false;
 		$scope.document = {};
 
 		$scope.refresh = function() {
-			$http.get('/programmings/prog')
+			$http.get('/programmings/prog/' + $stateParams.userId)
 				.then(function(response) {
 					$scope.document.languages = response.data;
 				}, ns.errorHandler);

@@ -1,6 +1,6 @@
 angular
 	.module('myapp')
-	.controller('contactCtrl', ['$scope', '$http', 'notificationService', function($scope, $http, ns) {
+	.controller('contactCtrl', ['$scope', '$stateParams', '$http', 'notificationService', function($scope, $stateParams, $http, ns) {
 		$scope.viewEditing = false;
 		$scope.document = {
 			links: [],
@@ -8,7 +8,8 @@ angular
 		};
 
 		$scope.refresh = function() {
-			$http.get('/contacts')
+			console.log('Getting contact data:', $stateParams.userId);
+			$http.get('/contacts/' + $stateParams.userId)
 				.then(function(response) {
 					$scope.document = response.data;
 				}, ns.errorHandler);

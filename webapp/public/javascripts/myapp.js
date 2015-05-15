@@ -4,20 +4,20 @@ angular
 		$urlRouterProvider.otherwise('/home/cv');
 
 		$stateProvider
-			.state('home', {				
-				url: '/home',				
+			.state('home', {
+				url: '/home',
 				views: {
 					header: {
 						templateUrl: '/templates/home/header.html'
 					},
-					body:{
+					body: {
 						templateUrl: '/templates/home.html',
-						controller: 'homeController'						
+						controller: 'homeController'
 					}
-				}	
+				}
 			})
 			.state('home.cv', {
-				url: '/cv',				
+				url: '/cv',
 				views: {
 					'contact': {
 						templateUrl: '/templates/home/contact.html',
@@ -55,15 +55,15 @@ angular
 					body: {
 						template: '<div ui-view></div>'
 					}
-				}				
+				}
 			})
 			.state('login.signup', {
-				url:'/signup',
+				url: '/signup',
 				templateUrl: '/templates/login/signup.html',
 				controller: 'signupCtrl'
 			})
 			.state('login.signin', {
-				url:'/signin',
+				url: '/signin',
 				templateUrl: '/templates/login/signin.html'
 			})
 			.state('admin', {
@@ -76,6 +76,13 @@ angular
 		$scope.apiResponse = '';
 		$scope.editing = false;
 		$scope.canEdit = true;
+
+		document.cookie.split('; ').forEach(function(item) {
+			var parts = item.split('=');
+			if (parts[0] === 'canEdit') {
+				$scope.canEdit = (parts[1] === 'true');
+			}
+		})
 
 		function refreshUsers() {
 			$http.get('/users').then(function(response) {

@@ -60,7 +60,9 @@ app.use(session({
   secret: '0efa268a-ab82-4534-9c96-758f4dea6d88',
   store: new sessionStore({
     mongooseConnection: sessionStoreConnection
-  })
+  }),
+  resave: false,
+  saveUninitialized: false
 }));
 
 

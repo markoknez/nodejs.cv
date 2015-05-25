@@ -21,7 +21,7 @@ angular
 			$scope.document.links.splice(index, 1);
 		};
 		$scope.save = function() {
-			$http.put('/contacts', $scope.document)
+			$http.put('/contacts/' + $stateParams.userId, $scope.document)
 				.then(function(response) {
 					ns.pushMessage('Saved successfully.', 'success');
 				}, ns.errorHandler);

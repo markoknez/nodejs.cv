@@ -16,16 +16,16 @@ router.get('/:userId', function(req, res, next) {
 	})
 });
 
-router.put('/', function(req, res, next) {
+router.put('/:userId', function(req, res, next) {
 	var newC = new contact(req.body);
-	newC.userId = req.user.email;
+	newC.userId = req.params.userId;
 
 	newC.validate(function(err) {
 		if (err) return next(err);
 
 		contact.update({
 			_id: newC._id,
-			userId: req.user.email
+			userId: req.params.userId
 		}, newC.toObject(), {
 			upsert: true
 		}, function(err, raw) {
